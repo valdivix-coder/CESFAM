@@ -17,6 +17,12 @@ test('serves the application and rejects everything else', async (t) => {
     const body = await response.text();
     assert.match(body, /<script src="sector-lookup.js"><\/script>/);
     assert.match(body, /<script src="app.js"><\/script>/);
+    assert.match(body, /<title>Consulta tu sector · CESFAM Pitryfquén<\/title>/);
+    assert.match(body, /CESFAM Pitryfquén/, 'the clinic must be named on the page');
+    assert.match(body, /Mg\. Simón Valdivia/);
+    assert.match(body, /wa\.me\/message\/BTVOFGDVGI5UG1/);
+    assert.match(body, /linkedin\.com\/in\/s-valdivia-v/);
+    assert.match(body, /&copy; 2026/);
   });
 
   await t.test('serves every asset the page loads', async () => {

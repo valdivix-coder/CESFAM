@@ -116,11 +116,36 @@ test('every split street has both tramos and they cover all house numbers', () =
 });
 
 test('suggests streets by prefix and by substring', () => {
-  assert.ok(suggestStreets('coig').includes('LOS COIGÜES'));
+  assert.deepEqual(suggestStreets('coig'), [
+    { name: 'LOS COIGÜES', normalizedBase: 'LOS COIGUES', sectors: ['amarillo'] },
+  ]);
   assert.ok(suggestStreets('parque nacional').length >= 5);
   assert.deepEqual(suggestStreets('a'), [], 'a single letter is too broad to suggest');
   assert.deepEqual(suggestStreets('zzzzz'), []);
   assert.ok(suggestStreets('parque', sectorDatabase, 3).length <= 3);
+});
+
+test('a suggestion carries every sector the street belongs to, once', () => {
+  assert.deepEqual(suggestStreets('andres bello'), [
+    { name: 'ANDRÉS BELLO', normalizedBase: 'ANDRES BELLO', sectors: ['amarillo', 'azul'] },
+  ]);
+  assert.deepEqual(suggestStreets('barros'), [
+    { name: 'BARROS ARANA', normalizedBase: 'BARROS ARANA', sectors: ['amarillo', 'azul'] },
+  ]);
+});
+
+test('suggestions that start with the query come before the rest', () => {
+  const names = suggestStreets('bello').map((suggestion) => suggestion.name);
+  assert.ok(names.includes('ANDRÉS BELLO'), 'a mid-word match is still offered');
+  const parks = suggestStreets('parque');
+  assert.ok(parks.every((suggestion) => suggestion.name.startsWith('PARQUE')));
+});
+
+test('accent folding keeps offsets so a match can be highlighted', () => {
+  const { foldAccents } = require('../src/sector-lookup');
+  assert.equal(foldAccents('ANDRÉS BELLO'), 'ANDRES BELLO');
+  assert.equal(foldAccents('VICUÑA').length, 'VICUÑA'.length);
+  assert.equal(foldAccents(undefined), '');
 });
 
 test('normalizes accents, case and repeated whitespace', () => {

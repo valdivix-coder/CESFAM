@@ -22,6 +22,7 @@ function suggestStreets(query, database = sectorDatabase, limit) {
 module.exports = {
   findSectorsByStreet,
   suggestStreets,
+  foldAccents: lookup.foldAccents,
   normalizeStreetName: lookup.normalizeStreetName,
   parseQuery: lookup.parseQuery,
   sectorDatabase,
