@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0d10">
+    <title>Consulta tu sector</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="hero">
+        <p class="eyebrow"><span></span> CESFAM</p>
+        <h1>Consulta tu sector</h1>
+      </header>
+
+      <section class="search-panel" aria-labelledby="search-title">
+        <h2 id="search-title">Consulta</h2>
+        <form id="street-form" novalidate>
+          <label class="sr-only" for="street-input">Nombre de calle</label>
+          <div class="search-row">
+            <input id="street-input" name="street" type="search" autocomplete="off" placeholder="Ej. 5 de abril o Bilbao" required>
+            <button type="submit">Buscar <span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+        <p class="help">Escribe la calle completa o una parte.</p>
+      </section>
+
+      <section aria-live="polite" aria-atomic="true">
+        <div id="result" class="result empty">Ingresa una calle.</div>
+      </section>
+
+      <section class="summary" aria-label="Sectores disponibles">
+        <div id="sector-summary" class="sector-summary"></div>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
