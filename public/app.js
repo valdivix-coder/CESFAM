@@ -28,7 +28,11 @@ function showResult(matches, street) {
   result.className = 'result found';
   result.replaceChildren(...matches.map(({ sectorName, street: storedStreet }) => {
     const item = document.createElement('div');
-    item.innerHTML = `<strong>${sectorName}</strong><span>${storedStreet}</span>`;
+    const sector = document.createElement('strong');
+    const street = document.createElement('span');
+    sector.textContent = sectorName;
+    street.textContent = storedStreet;
+    item.append(sector, street);
     return item;
   }));
 }
@@ -38,8 +42,12 @@ fetch('data/sectores.json')
   .then((database) => {
     database.sectors.forEach((sector) => {
       const card = document.createElement('article');
+      const name = document.createElement('strong');
+      const count = document.createElement('span');
       card.className = `sector-card ${sector.id}`;
-      card.innerHTML = `<strong>${sector.name}</strong><span>${sector.streets.length} calles</span>`;
+      name.textContent = sector.name;
+      count.textContent = `${sector.streets.length} calles`;
+      card.append(name, count);
       summary.append(card);
     });
 

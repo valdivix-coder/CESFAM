@@ -3,35 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Consulta de sectores CESFAM</title>
+    <meta name="theme-color" content="#0b0d10">
+    <title>CESFAM · Sectores</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <main class="page-shell">
-      <header>
-        <p class="eyebrow">CESFAM · Consulta territorial</p>
-        <h1>Encuentra el sector de una calle</h1>
-        <p class="intro">Escribe el nombre exacto de la calle. Puedes usar mayúsculas o minúsculas y omitir tildes.</p>
+      <header class="hero">
+        <p class="eyebrow"><span></span> CESFAM</p>
+        <h1>Sectoriza<br>una calle.</h1>
       </header>
 
       <section class="search-panel" aria-labelledby="search-title">
-        <h2 id="search-title">Buscar calle</h2>
+        <h2 id="search-title">Consulta</h2>
         <form id="street-form" novalidate>
-          <label for="street-input">Nombre de calle</label>
+          <label class="sr-only" for="street-input">Nombre de calle</label>
           <div class="search-row">
-            <input id="street-input" name="street" type="search" autocomplete="off" placeholder="Ej.: Los Coigües" required>
-            <button type="submit">Consultar</button>
+            <input id="street-input" name="street" type="search" autocomplete="off" placeholder="Ej. Los Coigües" required>
+            <button type="submit">Buscar <span aria-hidden="true">↗</span></button>
           </div>
         </form>
-        <p class="help">Para calles divididas por número, incluye el rango; por ejemplo: “Andrés Bello, menor de 800”.</p>
+        <p class="help">Sin tildes también funciona.</p>
       </section>
 
       <section aria-live="polite" aria-atomic="true">
-        <div id="result" class="result empty">Ingresa una calle para comenzar la consulta.</div>
+        <div id="result" class="result empty">Ingresa una calle.</div>
       </section>
 
-      <section class="summary" aria-labelledby="summary-title">
-        <h2 id="summary-title">Base de consulta cargada</h2>
+      <section class="summary" aria-label="Sectores disponibles">
         <div id="sector-summary" class="sector-summary"></div>
       </section>
     </main>
