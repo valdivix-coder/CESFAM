@@ -1,7 +1,7 @@
 'use strict';
 
 /*
- * Consulta tu sector · CESFAM Pitryfquén
+ * Consulta tu sector · CESFAM Pitrufquén
  *
  * The page answers one question, so the interaction is one field: suggestions
  * appear while the neighbour types, and the sector's colour arrives with them.

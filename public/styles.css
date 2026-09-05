@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   Consulta tu sector · CESFAM Pitryfquén
+   Consulta tu sector · CESFAM Pitrufquén
 
    The three sectors are named after colours, so colour is the answer, not the
    decoration: the page stays monochrome until it resolves a street, and then
@@ -43,7 +43,7 @@
   --verde-wash-b: #d6ede1;
 
   --sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --display: 'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
+  --display: 'Archivo', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
 
   --step: 4px;
   --radius: 14px;
@@ -147,18 +147,17 @@ body {
 }
 
 /* ── Masthead ─────────────────────────────────────────────────────────────*/
-.masthead { display: flex; flex-direction: column; gap: calc(var(--step) * 3); }
+.masthead { display: flex; flex-direction: column; gap: calc(var(--step) * 4); }
 
 .eyebrow {
   align-items: center;
   color: var(--muted);
   display: flex;
-  font-size: .715rem;
-  font-weight: 600;
+  font-size: .84rem;
+  font-weight: 500;
   gap: 10px;
-  letter-spacing: .155em;
+  letter-spacing: .015em;
   margin: 0;
-  text-transform: uppercase;
 }
 
 .mark { display: inline-flex; gap: 3px; }
@@ -169,12 +168,13 @@ body {
 
 h1 {
   font-family: var(--display);
-  font-optical-sizing: auto;
-  font-size: clamp(2.7rem, 11vw, 3.7rem);
-  font-weight: 400;
-  letter-spacing: -.028em;
-  line-height: 1.0;
+  font-size: clamp(2.15rem, 8.4vw, 2.95rem);
+  font-stretch: 112%;
+  font-weight: 680;
+  letter-spacing: -.012em;
+  line-height: .96;
   margin: 0;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 
@@ -182,7 +182,7 @@ h1 {
   color: var(--muted);
   font-size: 1.015rem;
   line-height: 1.6;
-  margin: 0;
+  margin: 3px 0 0;
   max-width: 36ch;
 }
 
@@ -327,11 +327,11 @@ h1 {
 
 .panel-sector {
   font-family: var(--display);
-  font-optical-sizing: auto;
-  font-size: clamp(1.65rem, 6.4vw, 2.05rem);
-  font-weight: 400;
-  letter-spacing: -.02em;
-  line-height: 1.1;
+  font-size: clamp(1.5rem, 5.8vw, 1.85rem);
+  font-stretch: 108%;
+  font-weight: 620;
+  letter-spacing: -.014em;
+  line-height: 1.12;
 }
 
 .panel-street {
