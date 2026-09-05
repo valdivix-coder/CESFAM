@@ -87,6 +87,7 @@ function createPage() {
     ['#clear-button', 'button'],
     ['#suggestions', 'ul'],
     ['#answer', 'section'],
+    ['#install-button', 'button'],
   ]) {
     const node = new Element(tag);
     node.id = selector.slice(1);
@@ -94,6 +95,7 @@ function createPage() {
   }
   elements['#suggestions'].hidden = true;
   elements['#clear-button'].hidden = true;
+  elements['#install-button'].hidden = true;
 
   return {
     elements,
@@ -110,17 +112,29 @@ function createPage() {
 const database = JSON.parse(readFileSync('data/sectores.json', 'utf8'));
 
 /** Loads sector-lookup.js and app.js in one sandbox, with a stubbed fetch. */
-function loadApp({ fetchImpl, seeded } = {}) {
+function loadApp({ fetchImpl, seeded, serviceWorker } = {}) {
   const page = createPage();
+  const registrations = [];
+  const listeners = new Map();
   const sandbox = {
     document: page.document,
     console,
     URL,
     setTimeout,
     fetch: fetchImpl || (async () => ({ ok: true, status: 200, json: async () => database })),
+    navigator: serviceWorker === false ? {} : {
+      serviceWorker: { register: async (path) => { registrations.push(path); } },
+    },
+    addEventListener(name, handler) {
+      listeners.set(name, (listeners.get(name) || []).concat(handler));
+    },
   };
   sandbox.window = sandbox;
   sandbox.self = sandbox;
+  sandbox.registrations = registrations;
+  sandbox.fire = (name, event = {}) => {
+    for (const handler of listeners.get(name) || []) handler({ preventDefault() {}, ...event });
+  };
   if (seeded) sandbox.SECTOR_DATABASE = database;
   vm.createContext(sandbox);
   vm.runInContext(readFileSync('public/sector-lookup.js', 'utf8'), sandbox, { filename: 'sector-lookup.js' });
@@ -128,7 +142,7 @@ function loadApp({ fetchImpl, seeded } = {}) {
 
   // Flush the whole microtask queue so a rejected fetch reaches its catch.
   const settle = () => new Promise((resolve) => setImmediate(resolve));
-  return { ...page, settle };
+  return { ...page, settle, sandbox, registrations };
 }
 
 async function ready() {
@@ -361,4 +375,58 @@ test('resolves the database relative to its own script', async () => {
   });
   assert.equal(requested.length, 1);
   assert.match(requested[0], /public\/data\/sectores\.json$/);
+});
+
+/* ── Install and offline ───────────────────────────────────────────────── */
+
+test('the install button stays hidden until the browser offers to install', async () => {
+  const page = await ready();
+  const button = page.elements['#install-button'];
+  assert.equal(button.hidden, true, 'nunca promete una instalación que el equipo no hará');
+
+  let prompted = false;
+  let defaultPrevented = false;
+  page.sandbox.fire('beforeinstallprompt', {
+    preventDefault: () => { defaultPrevented = true; },
+    prompt: async () => { prompted = true; },
+  });
+  assert.ok(defaultPrevented, 'el aviso propio del navegador se pospone en favor del botón');
+  assert.equal(button.hidden, false);
+
+  button.dispatch('click');
+  await page.settle();
+  assert.ok(prompted, 'el botón abre el diálogo de instalación');
+  assert.equal(button.hidden, true, 'no queda un botón que ya no hace nada');
+});
+
+test('the button disappears once the app is installed', async () => {
+  const page = await ready();
+  page.sandbox.fire('beforeinstallprompt', { prompt: async () => {} });
+  assert.equal(page.elements['#install-button'].hidden, false);
+  page.sandbox.fire('appinstalled');
+  assert.equal(page.elements['#install-button'].hidden, true);
+});
+
+test('registers the service worker with a relative path', async () => {
+  const page = await ready();
+  page.sandbox.fire('load');
+  await page.settle();
+  assert.deepEqual(page.registrations, ['sw.js'],
+    'una ruta absoluta rompería el despliegue en un subdirectorio');
+});
+
+test('a build that ships its own listing registers no worker', async () => {
+  const page = loadApp({ seeded: true, fetchImpl: () => { throw new Error('no debe pedir nada'); } });
+  page.sandbox.fire('load');
+  await page.settle();
+  assert.deepEqual(page.registrations, []);
+});
+
+test('a browser without service workers still runs the app', async () => {
+  const page = loadApp({ serviceWorker: false });
+  await page.settle();
+  page.sandbox.fire('load');
+  await page.settle();
+  type(page, 'ambar');
+  assert.deepEqual(sectorsShown(page), ['verde']);
 });

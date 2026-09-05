@@ -167,7 +167,6 @@ body {
 h1 {
   font-family: var(--display);
   font-size: clamp(2.15rem, 8.4vw, 2.95rem);
-  font-stretch: 112%;
   font-weight: 680;
   letter-spacing: -.012em;
   line-height: .96;
@@ -326,7 +325,6 @@ h1 {
 .panel-sector {
   font-family: var(--display);
   font-size: clamp(1.5rem, 5.8vw, 1.85rem);
-  font-stretch: 108%;
   font-weight: 620;
   letter-spacing: -.014em;
   line-height: 1.12;
@@ -412,6 +410,22 @@ h1 {
 
 .credits-line strong { color: var(--ink-soft); font-weight: 600; }
 .credits-role { color: var(--faint); display: block; }
+
+.install {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: .8rem;
+  font-weight: 500;
+  padding: 9px 18px;
+  transition: border-color .18s ease, color .18s ease;
+}
+
+.install:hover { border-color: var(--faint); color: var(--ink); }
+.install:focus-visible { box-shadow: 0 0 0 3px var(--ring); outline: none; }
 
 .social { display: flex; gap: 10px; }
 
