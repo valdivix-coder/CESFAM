@@ -155,16 +155,14 @@ body {
   display: flex;
   font-size: .84rem;
   font-weight: 500;
-  gap: 10px;
+  gap: 12px;
   letter-spacing: .015em;
   margin: 0;
 }
 
-.mark { display: inline-flex; gap: 3px; }
-.mark i { border-radius: 50%; height: 6px; width: 6px; }
-.mark i:nth-child(1) { background: var(--amarillo-dot); }
-.mark i:nth-child(2) { background: var(--azul-dot); }
-.mark i:nth-child(3) { background: var(--verde-dot); }
+/* The municipal crest is the page's only illustration, so it stays small and
+   sits on the baseline of the name it belongs to. */
+.crest { height: 46px; width: auto; }
 
 h1 {
   font-family: var(--display);
