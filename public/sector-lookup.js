@@ -10,14 +10,17 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
+  /**
+   * Drops accents while keeping the string's length, so a match found on the
+   * folded text can be highlighted at the same offsets in the original.
+   */
+  function foldAccents(value) {
+    return String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
   /** Normalizes a street name so users can search without matching accents or case. */
   function normalizeStreetName(value) {
-    return String(value ?? '')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toUpperCase()
-      .replace(/\s+/g, ' ')
-      .trim();
+    return foldAccents(value).toUpperCase().replace(/\s+/g, ' ').trim();
   }
 
   /**
@@ -98,26 +101,41 @@
     return matches;
   }
 
-  /** Street names that start with or contain the query, for search suggestions. */
+  /**
+   * Streets whose name starts with or contains the query, ready to be listed
+   * while the user types. Each suggestion carries the sectors it belongs to, so
+   * the list can show the answer's colour before the answer itself.
+   */
   function suggestStreets(query, database, limit) {
     const normalized = normalizeStreetName(parseQuery(query).street);
-    const maximum = limit || 8;
+    const maximum = limit || 7;
     if (normalized.length < 2 || !database || !Array.isArray(database.sectors)) return [];
 
-    const seen = new Set();
-    const starts = [];
-    const contains = [];
+    const found = new Map();
     for (const sector of database.sectors) {
       for (const street of sector.streets) {
-        if (seen.has(street.normalizedBase)) continue;
         const position = street.normalizedBase.indexOf(normalized);
         if (position === -1) continue;
-        seen.add(street.normalizedBase);
-        (position === 0 ? starts : contains).push(street.baseName);
+        const existing = found.get(street.normalizedBase);
+        if (existing) {
+          if (!existing.sectors.includes(sector.id)) existing.sectors.push(sector.id);
+          continue;
+        }
+        found.set(street.normalizedBase, {
+          name: street.baseName,
+          normalizedBase: street.normalizedBase,
+          sectors: [sector.id],
+          // Whole-word matches read as better answers than mid-word ones.
+          rank: position === 0 ? 0 : 1,
+        });
       }
     }
-    return starts.concat(contains).slice(0, maximum);
+
+    return [...found.values()]
+      .sort((a, b) => a.rank - b.rank || a.normalizedBase.localeCompare(b.normalizedBase))
+      .slice(0, maximum)
+      .map(({ name, normalizedBase, sectors }) => ({ name, normalizedBase, sectors }));
   }
 
-  return { findSectorsByStreet, normalizeStreetName, parseQuery, suggestStreets };
+  return { findSectorsByStreet, foldAccents, normalizeStreetName, parseQuery, suggestStreets };
 });

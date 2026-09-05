@@ -1,51 +1,453 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Consulta tu sector · CESFAM Pitrufquén
+
+   The three sectors are named after colours, so colour is the answer, not the
+   decoration: the page stays monochrome until it resolves a street, and then
+   the sector's hue floods the result. Every colour is a token declared here in
+   the light palette first, and redefined for dark below.
+   ───────────────────────────────────────────────────────────────────────────*/
+
 :root {
-  color: #f4f4f1;
-  background: #0b0d10;
-  font-family: Manrope, Arial, sans-serif;
-  font-synthesis: none;
+  color-scheme: light dark;
+
+  --bg: #f1f3f5;
+  --surface: #ffffff;
+  --surface-sunken: #e9edf0;
+  --ink: #14181c;
+  --ink-soft: #3c4650;
+  --muted: #626d78;
+  --faint: #8b959e;
+  --line: #dfe4e8;
+  --line-strong: #c9d1d7;
+  --ring: rgba(20, 24, 28, .13);
+  --shadow-field: 0 1px 2px rgba(20, 24, 28, .05), 0 8px 24px -12px rgba(20, 24, 28, .18);
+  --shadow-pop: 0 12px 34px -16px rgba(20, 24, 28, .28);
+
+  /* Sector palettes: ink reads on the wash, dot reads on the page. */
+  --amarillo-ink: #7a5200;
+  --amarillo-dot: #d9a22b;
+  --amarillo-edge: #ecd9a6;
+  --amarillo-wash-a: #fdf6e4;
+  --amarillo-wash-b: #f7e9c4;
+
+  --azul-ink: #0a5b93;
+  --azul-dot: #2c8ed6;
+  --azul-edge: #bed9ef;
+  --azul-wash-a: #ecf4fb;
+  --azul-wash-b: #d9e9f7;
+
+  --verde-ink: #0a6a49;
+  --verde-dot: #1f9e70;
+  --verde-edge: #b3ddc8;
+  --verde-wash-a: #eaf6f0;
+  --verde-wash-b: #d6ede1;
+
+  --sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display: 'Archivo', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+
+  --step: 4px;
+  --radius: 14px;
+  --radius-lg: 20px;
 }
 
-* { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; }
-button, input { font: inherit; }
-.page-shell { margin: 0 auto; max-width: 780px; min-height: 100vh; padding: clamp(32px, 8vw, 92px) 24px 48px; position: relative; }
-.page-shell::before { background: radial-gradient(circle, rgb(117 255 194 / 14%), transparent 68%); content: ''; height: 540px; pointer-events: none; position: fixed; right: -150px; top: -260px; width: 540px; }
-.hero { position: relative; }
-.eyebrow { align-items: center; color: #a4aaa7; display: flex; font-family: 'DM Mono', monospace; font-size: .7rem; font-weight: 500; gap: 9px; letter-spacing: .13em; margin: 0 0 25px; text-transform: uppercase; }
-.eyebrow span { background: #78f5b2; border-radius: 50%; box-shadow: 0 0 22px #78f5b2; height: 7px; width: 7px; }
-h1 { font-size: clamp(3.5rem, 11vw, 7.2rem); font-weight: 700; letter-spacing: -.085em; line-height: .86; margin: 0; max-width: 7ch; }
-.search-panel { background: rgb(25 29 34 / 72%); border: 1px solid #30363c; border-radius: 20px; margin-top: clamp(55px, 10vw, 94px); padding: 22px; position: relative; }
-h2 { color: #9ea6a4; font-family: 'DM Mono', monospace; font-size: .68rem; font-weight: 400; letter-spacing: .12em; margin: 0 0 13px; text-transform: uppercase; }
-.search-row { display: flex; gap: 10px; }
-input { background: #101317; border: 1px solid #414a51; border-radius: 11px; caret-color: #78f5b2; color: #fff; flex: 1; min-width: 0; outline: 0; padding: 15px 16px; transition: border-color .2s, box-shadow .2s; }
-input::placeholder { color: #7c8589; }
-input:focus { border-color: #78f5b2; box-shadow: 0 0 0 4px rgb(120 245 178 / 11%); }
-button { background: #78f5b2; border: 0; border-radius: 11px; color: #07100b; cursor: pointer; font-size: .9rem; font-weight: 800; padding: 0 20px; transition: background .2s, transform .2s; }
-button:hover { background: #a0ffc9; transform: translateY(-1px); }
-button span { font-size: 1.1rem; margin-left: 4px; }
-.help { color: #888f91; font-size: .78rem; margin: 12px 2px 0; }
-.result { background: #12161a; border: 1px solid #2b3339; border-radius: 16px; color: #b0b8b7; display: grid; font-size: .94rem; gap: 10px; margin-top: 16px; min-height: 62px; padding: 18px 20px; place-content: center start; }
-.result.found { border-color: rgb(120 245 178 / 55%); color: #f7fbf8; }
-.result.not-found, .result.error { border-color: #6c6045; color: #d8c899; }
-.result div { align-items: baseline; display: flex; gap: 14px; justify-content: space-between; }
-.result strong { font-size: 1.03rem; letter-spacing: -.02em; }
-.result span { color: #8e9997; font-family: 'DM Mono', monospace; font-size: .67rem; text-align: right; }
-.summary { margin-top: 40px; }
-.sector-summary { display: grid; gap: 9px; grid-template-columns: repeat(3, 1fr); }
-.sector-card { background: #101317; border: 1px solid #282f34; border-radius: 12px; display: grid; gap: 6px; min-height: 80px; padding: 13px; position: relative; overflow: hidden; }
-.sector-card::before { border-radius: 999px; content: ''; height: 5px; width: 5px; }
-.sector-card strong { font-size: .77rem; font-weight: 700; letter-spacing: -.02em; }
-.sector-card span { color: #7e8987; font-family: 'DM Mono', monospace; font-size: .65rem; }
-.amarillo::before { background: #f5cd61; }.azul::before { background: #68b8ff; }.verde::before { background: #76e5a6; }
-.sr-only { clip: rect(0, 0, 0, 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
-@media (max-width: 520px) { .page-shell { padding-inline: 18px; } .search-panel { padding: 16px; } .search-row { flex-direction: column; } button { min-height: 48px; } }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101418;
+    --surface: #171c22;
+    --surface-sunken: #12171c;
+    --ink: #edf0f2;
+    --ink-soft: #cbd3d9;
+    --muted: #96a1ab;
+    --faint: #6d7882;
+    --line: #242b32;
+    --line-strong: #333c45;
+    --ring: rgba(237, 240, 242, .16);
+    --shadow-field: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -14px rgba(0, 0, 0, .7);
+    --shadow-pop: 0 16px 40px -18px rgba(0, 0, 0, .8);
 
-.search-row #number-input { flex: 0 0 84px; min-width: 0; text-align: center; }
-.result p { margin: 0; }
-.result-warning { color: #e6c67a; font-size: .85rem; line-height: 1.45; }
-.result-note { color: #8e9997; font-size: .85rem; line-height: 1.45; }
-.result .suggestions { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-.result .suggestions button { background: #171c21; border: 1px solid #2b3339; border-radius: 999px; color: #d6dedd; cursor: pointer; font: inherit; font-size: .78rem; padding: 6px 12px; }
-.result .suggestions button:hover, .result .suggestions button:focus-visible { background: #1f262c; border-color: #3d4750; }
-.search-row button[disabled] { cursor: progress; opacity: .55; }
-@media (max-width: 520px) { .search-row #number-input { flex: 1 1 auto; text-align: left; } }
+    --amarillo-ink: #f6d68c;
+    --amarillo-dot: #f0c25c;
+    --amarillo-edge: #4b3d1d;
+    --amarillo-wash-a: #211d12;
+    --amarillo-wash-b: #2d2517;
+
+    --azul-ink: #a3d1ff;
+    --azul-dot: #5fb3f5;
+    --azul-edge: #24405a;
+    --azul-wash-a: #101f2c;
+    --azul-wash-b: #14293b;
+
+    --verde-ink: #91e9c0;
+    --verde-dot: #4fce97;
+    --verde-edge: #1e4a38;
+    --verde-wash-a: #0f231b;
+    --verde-wash-b: #123024;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #101418;
+  --surface: #171c22;
+  --surface-sunken: #12171c;
+  --ink: #edf0f2;
+  --ink-soft: #cbd3d9;
+  --muted: #96a1ab;
+  --faint: #6d7882;
+  --line: #242b32;
+  --line-strong: #333c45;
+  --ring: rgba(237, 240, 242, .16);
+  --shadow-field: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -14px rgba(0, 0, 0, .7);
+  --shadow-pop: 0 16px 40px -18px rgba(0, 0, 0, .8);
+
+  --amarillo-ink: #f6d68c;
+  --amarillo-dot: #f0c25c;
+  --amarillo-edge: #4b3d1d;
+  --amarillo-wash-a: #211d12;
+  --amarillo-wash-b: #2d2517;
+
+  --azul-ink: #a3d1ff;
+  --azul-dot: #5fb3f5;
+  --azul-edge: #24405a;
+  --azul-wash-a: #101f2c;
+  --azul-wash-b: #14293b;
+
+  --verde-ink: #91e9c0;
+  --verde-dot: #4fce97;
+  --verde-edge: #1e4a38;
+  --verde-wash-a: #0f231b;
+  --verde-wash-b: #123024;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Several controls set `display`, which would otherwise beat the default
+   [hidden] rule and leave them on screen. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Shell ─────────────────────────────────────────────────────────────────
+   One centred column. The zones are separated by rhythm, not by boxes.      */
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--step) * 9);
+  margin: 0 auto;
+  max-width: 33rem;
+  padding: clamp(40px, 9vh, 80px) 24px 40px;
+}
+
+/* ── Masthead ─────────────────────────────────────────────────────────────*/
+.masthead { display: flex; flex-direction: column; gap: calc(var(--step) * 4); }
+
+.eyebrow {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  font-size: .84rem;
+  font-weight: 500;
+  gap: 10px;
+  letter-spacing: .015em;
+  margin: 0;
+}
+
+.mark { display: inline-flex; gap: 3px; }
+.mark i { border-radius: 50%; height: 6px; width: 6px; }
+.mark i:nth-child(1) { background: var(--amarillo-dot); }
+.mark i:nth-child(2) { background: var(--azul-dot); }
+.mark i:nth-child(3) { background: var(--verde-dot); }
+
+h1 {
+  font-family: var(--display);
+  font-size: clamp(2.15rem, 8.4vw, 2.95rem);
+  font-stretch: 112%;
+  font-weight: 680;
+  letter-spacing: -.012em;
+  line-height: .96;
+  margin: 0;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.lede {
+  color: var(--muted);
+  font-size: 1.015rem;
+  line-height: 1.6;
+  margin: 3px 0 0;
+  max-width: 36ch;
+}
+
+/* ── Search field ─────────────────────────────────────────────────────────
+   The only interactive object on the page, so it carries the most weight.   */
+.finder { position: relative; }
+
+.field {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-field);
+  display: flex;
+  gap: 12px;
+  padding: 0 8px 0 18px;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.field:focus-within {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-field), 0 0 0 3px var(--ring);
+}
+
+.field-icon { color: var(--faint); flex: none; height: 19px; width: 19px; }
+
+#street-input {
+  background: none;
+  border: 0;
+  color: var(--ink);
+  flex: 1;
+  font-family: inherit;
+  font-size: 1.06rem;
+  letter-spacing: -.005em;
+  min-width: 0;
+  outline: none;
+  padding: 17px 0;
+}
+
+#street-input::placeholder { color: var(--faint); }
+#street-input::-webkit-search-cancel-button { display: none; }
+
+.field-clear {
+  align-items: center;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  color: var(--faint);
+  cursor: pointer;
+  display: flex;
+  flex: none;
+  height: 34px;
+  justify-content: center;
+  padding: 0;
+  transition: background .16s ease, color .16s ease;
+  width: 34px;
+}
+
+.field-clear svg { height: 16px; width: 16px; }
+.field-clear:hover { background: var(--surface-sunken); color: var(--ink-soft); }
+.field-clear:focus-visible { box-shadow: 0 0 0 3px var(--ring); outline: none; }
+
+/* ── Live suggestions ─────────────────────────────────────────────────────
+   The dots deliver the sector's colour before the answer does.              */
+.suggestions {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-pop);
+  left: 0;
+  list-style: none;
+  margin: 8px 0 0;
+  overflow: hidden;
+  padding: 6px;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 5;
+}
+
+.suggestions li { display: block; }
+
+.suggestion {
+  align-items: center;
+  background: none;
+  border: 0;
+  border-radius: 10px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: flex;
+  font-family: inherit;
+  font-size: .945rem;
+  gap: 12px;
+  justify-content: space-between;
+  padding: 11px 12px;
+  text-align: left;
+  transition: background .12s ease;
+  width: 100%;
+}
+
+.suggestion:hover,
+.suggestion[aria-selected="true"] { background: var(--surface-sunken); color: var(--ink); }
+.suggestion:focus-visible { box-shadow: 0 0 0 2px var(--ring); outline: none; }
+
+.suggestion-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.suggestion-name b { color: var(--ink); font-weight: 600; }
+
+.suggestion-dots { display: inline-flex; flex: none; gap: 4px; }
+.suggestion-dots span { border-radius: 50%; height: 7px; width: 7px; }
+
+.dot-amarillo { background: var(--amarillo-dot); }
+.dot-azul { background: var(--azul-dot); }
+.dot-verde { background: var(--verde-dot); }
+
+/* ── Answer ───────────────────────────────────────────────────────────────*/
+.answer { display: flex; flex-direction: column; gap: 10px; }
+
+.resting {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  color: var(--faint);
+  display: flex;
+  font-size: .9rem;
+  margin: 0;
+  padding-top: 18px;
+}
+
+.panel {
+  align-items: start;
+  background: linear-gradient(148deg, var(--wash-a), var(--wash-b));
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-lg);
+  color: var(--sector-ink);
+  display: grid;
+  gap: 5px;
+  padding: 21px 24px 23px;
+}
+
+.panel[data-sector="amarillo"] { --sector-ink: var(--amarillo-ink); --edge: var(--amarillo-edge); --wash-a: var(--amarillo-wash-a); --wash-b: var(--amarillo-wash-b); }
+.panel[data-sector="azul"] { --sector-ink: var(--azul-ink); --edge: var(--azul-edge); --wash-a: var(--azul-wash-a); --wash-b: var(--azul-wash-b); }
+.panel[data-sector="verde"] { --sector-ink: var(--verde-ink); --edge: var(--verde-edge); --wash-a: var(--verde-wash-a); --wash-b: var(--verde-wash-b); }
+
+.panel-sector {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 5.8vw, 1.85rem);
+  font-stretch: 108%;
+  font-weight: 620;
+  letter-spacing: -.014em;
+  line-height: 1.12;
+}
+
+.panel-street {
+  font-size: .77rem;
+  font-weight: 500;
+  letter-spacing: .075em;
+  opacity: .76;
+  text-transform: uppercase;
+}
+
+.note {
+  color: var(--muted);
+  font-size: .875rem;
+  line-height: 1.55;
+  margin: 0;
+  padding: 2px 4px;
+}
+
+.note strong { color: var(--ink-soft); font-weight: 600; }
+
+.miss {
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: .95rem;
+  margin: 0;
+  padding-top: 18px;
+}
+
+.miss em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+/* Asked for only when the street actually splits between two sectors. */
+.number-ask {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  padding: 12px 12px 12px 18px;
+}
+
+.number-ask label { color: var(--ink-soft); font-size: .9rem; font-weight: 500; }
+
+.number-ask input {
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+  padding: 9px 12px;
+  text-align: center;
+  width: 96px;
+}
+
+.number-ask input:focus-visible { border-color: var(--line-strong); box-shadow: 0 0 0 3px var(--ring); }
+
+/* ── Credits ──────────────────────────────────────────────────────────────*/
+.credits {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: clamp(56px, 13vh, 104px);
+  padding-top: 30px;
+  text-align: center;
+}
+
+.credits-line {
+  color: var(--muted);
+  font-size: .795rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 40ch;
+}
+
+.credits-line strong { color: var(--ink-soft); font-weight: 600; }
+.credits-role { color: var(--faint); display: block; }
+
+.social { display: flex; gap: 10px; }
+
+.social a {
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  display: flex;
+  height: 38px;
+  justify-content: center;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+  width: 38px;
+}
+
+.social a:hover { background: var(--surface); border-color: var(--line-strong); color: var(--ink); }
+.social a:focus-visible { box-shadow: 0 0 0 3px var(--ring); outline: none; }
+
+.copyright { color: var(--faint); font-size: .715rem; letter-spacing: .01em; margin: 0; }
+
+/* ── Motion ───────────────────────────────────────────────────────────────*/
+.panel, .miss, .number-ask, .note { animation: rise .32s cubic-bezier(.22, .8, .3, 1) both; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+@media (max-width: 420px) {
+  .shell { gap: calc(var(--step) * 7); padding-inline: 18px; }
+  .number-ask { padding-left: 14px; }
+  .number-ask input { width: 84px; }
+}
