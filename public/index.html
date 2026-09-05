@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0b0d10">
     <title>CESFAM · Sectores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -17,13 +20,15 @@
       <section class="search-panel" aria-labelledby="search-title">
         <h2 id="search-title">Consulta</h2>
         <form id="street-form" novalidate>
-          <label class="sr-only" for="street-input">Nombre de calle</label>
           <div class="search-row">
+            <label class="sr-only" for="street-input">Nombre de calle</label>
             <input id="street-input" name="street" type="search" autocomplete="off" placeholder="Ej. Los Coigües" required>
+            <label class="sr-only" for="number-input">Número de la casa</label>
+            <input id="number-input" name="number" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" placeholder="Nº" aria-describedby="search-help">
             <button type="submit">Buscar <span aria-hidden="true">↗</span></button>
           </div>
         </form>
-        <p class="help">Sin tildes también funciona.</p>
+        <p class="help" id="search-help">Sin tildes también funciona. Agrega el número cuando la calle se divide entre sectores.</p>
       </section>
 
       <section aria-live="polite" aria-atomic="true">
@@ -34,6 +39,7 @@
         <div id="sector-summary" class="sector-summary"></div>
       </section>
     </main>
+    <script src="sector-lookup.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

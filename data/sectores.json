@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "source": "Sectores Cesfam nuevo.xlsx",
   "sectors": [
     {
@@ -8,399 +8,682 @@
       "streets": [
         {
           "name": "LOS COIGÜES",
-          "normalizedName": "LOS COIGUES"
+          "normalizedName": "LOS COIGUES",
+          "baseName": "LOS COIGÜES",
+          "normalizedBase": "LOS COIGUES"
         },
         {
           "name": "CAMILO HENRIQUEZ",
-          "normalizedName": "CAMILO HENRIQUEZ"
+          "normalizedName": "CAMILO HENRIQUEZ",
+          "baseName": "CAMILO HENRIQUEZ",
+          "normalizedBase": "CAMILO HENRIQUEZ"
         },
         {
           "name": "RIO ALLIPEN",
-          "normalizedName": "RIO ALLIPEN"
+          "normalizedName": "RIO ALLIPEN",
+          "baseName": "RIO ALLIPEN",
+          "normalizedBase": "RIO ALLIPEN"
         },
         {
           "name": "CARLOS CONDELL",
-          "normalizedName": "CARLOS CONDELL"
+          "normalizedName": "CARLOS CONDELL",
+          "baseName": "CARLOS CONDELL",
+          "normalizedBase": "CARLOS CONDELL"
         },
         {
           "name": "GENERAL BAQUEDANO, MENOR DE 800",
-          "normalizedName": "GENERAL BAQUEDANO, MENOR DE 800"
+          "normalizedName": "GENERAL BAQUEDANO, MENOR DE 800",
+          "baseName": "GENERAL BAQUEDANO",
+          "normalizedBase": "GENERAL BAQUEDANO",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "ANDRÉS BELLO, MENOR DE 800",
-          "normalizedName": "ANDRES BELLO, MENOR DE 800"
+          "normalizedName": "ANDRES BELLO, MENOR DE 800",
+          "baseName": "ANDRÉS BELLO",
+          "normalizedBase": "ANDRES BELLO",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "5 DE ABRIL, MENOR DE 800",
-          "normalizedName": "5 DE ABRIL, MENOR DE 800"
+          "normalizedName": "5 DE ABRIL, MENOR DE 800",
+          "baseName": "5 DE ABRIL",
+          "normalizedBase": "5 DE ABRIL",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "18 DE SEPTIEMBRE, MENOR 800",
-          "normalizedName": "18 DE SEPTIEMBRE, MENOR 800"
+          "normalizedName": "18 DE SEPTIEMBRE, MENOR 800",
+          "baseName": "18 DE SEPTIEMBRE",
+          "normalizedBase": "18 DE SEPTIEMBRE",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "21 DE MAYO, MENOR DE 800",
-          "normalizedName": "21 DE MAYO, MENOR DE 800"
+          "normalizedName": "21 DE MAYO, MENOR DE 800",
+          "baseName": "21 DE MAYO",
+          "normalizedBase": "21 DE MAYO",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "12 DE FEBRERO, MENOR DE 800",
-          "normalizedName": "12 DE FEBRERO, MENOR DE 800"
+          "normalizedName": "12 DE FEBRERO, MENOR DE 800",
+          "baseName": "12 DE FEBRERO",
+          "normalizedBase": "12 DE FEBRERO",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "VICUÑA MACKENNA, MENOR DE 800",
-          "normalizedName": "VICUNA MACKENNA, MENOR DE 800"
+          "normalizedName": "VICUNA MACKENNA, MENOR DE 800",
+          "baseName": "VICUÑA MACKENNA",
+          "normalizedBase": "VICUNA MACKENNA",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "IGNACIO SERRANO",
-          "normalizedName": "IGNACIO SERRANO"
+          "normalizedName": "IGNACIO SERRANO",
+          "baseName": "IGNACIO SERRANO",
+          "normalizedBase": "IGNACIO SERRANO"
         },
         {
           "name": "MADRE JACINTA",
-          "normalizedName": "MADRE JACINTA"
+          "normalizedName": "MADRE JACINTA",
+          "baseName": "MADRE JACINTA",
+          "normalizedBase": "MADRE JACINTA"
         },
         {
           "name": "RIO CAUTIN",
-          "normalizedName": "RIO CAUTIN"
+          "normalizedName": "RIO CAUTIN",
+          "baseName": "RIO CAUTIN",
+          "normalizedBase": "RIO CAUTIN"
         },
         {
           "name": "RIO QUINQUE",
-          "normalizedName": "RIO QUINQUE"
+          "normalizedName": "RIO QUINQUE",
+          "baseName": "RIO QUINQUE",
+          "normalizedBase": "RIO QUINQUE"
         },
         {
           "name": "PEDRO LEON GALLO NORTE",
-          "normalizedName": "PEDRO LEON GALLO NORTE"
+          "normalizedName": "PEDRO LEON GALLO NORTE",
+          "baseName": "PEDRO LEON GALLO NORTE",
+          "normalizedBase": "PEDRO LEON GALLO NORTE"
         },
         {
           "name": "LOS NOTROS",
-          "normalizedName": "LOS NOTROS"
+          "normalizedName": "LOS NOTROS",
+          "baseName": "LOS NOTROS",
+          "normalizedBase": "LOS NOTROS"
         },
         {
           "name": "ISABEL RIQUELME",
-          "normalizedName": "ISABEL RIQUELME"
+          "normalizedName": "ISABEL RIQUELME",
+          "baseName": "ISABEL RIQUELME",
+          "normalizedBase": "ISABEL RIQUELME"
         },
         {
           "name": "LAS CAMELIAS",
-          "normalizedName": "LAS CAMELIAS"
+          "normalizedName": "LAS CAMELIAS",
+          "baseName": "LAS CAMELIAS",
+          "normalizedBase": "LAS CAMELIAS"
         },
         {
           "name": "LAS CARMELITAS",
-          "normalizedName": "LAS CARMELITAS"
+          "normalizedName": "LAS CARMELITAS",
+          "baseName": "LAS CARMELITAS",
+          "normalizedBase": "LAS CARMELITAS"
         },
         {
           "name": "LAGO VILLARRICA",
-          "normalizedName": "LAGO VILLARRICA"
+          "normalizedName": "LAGO VILLARRICA",
+          "baseName": "LAGO VILLARRICA",
+          "normalizedBase": "LAGO VILLARRICA"
         },
         {
           "name": "GRONOW",
-          "normalizedName": "GRONOW"
+          "normalizedName": "GRONOW",
+          "baseName": "GRONOW",
+          "normalizedBase": "GRONOW"
         },
         {
           "name": "LAS ROSAS",
-          "normalizedName": "LAS ROSAS"
+          "normalizedName": "LAS ROSAS",
+          "baseName": "LAS ROSAS",
+          "normalizedBase": "LAS ROSAS"
         },
         {
           "name": "LOS CLAVELES",
-          "normalizedName": "LOS CLAVELES"
+          "normalizedName": "LOS CLAVELES",
+          "baseName": "LOS CLAVELES",
+          "normalizedBase": "LOS CLAVELES"
         },
         {
           "name": "LOS TULIPANES",
-          "normalizedName": "LOS TULIPANES"
+          "normalizedName": "LOS TULIPANES",
+          "baseName": "LOS TULIPANES",
+          "normalizedBase": "LOS TULIPANES"
         },
         {
           "name": "CASANOVA",
-          "normalizedName": "CASANOVA"
+          "normalizedName": "CASANOVA",
+          "baseName": "CASANOVA",
+          "normalizedBase": "CASANOVA"
         },
         {
           "name": "LOS ARAUCANOS",
-          "normalizedName": "LOS ARAUCANOS"
+          "normalizedName": "LOS ARAUCANOS",
+          "baseName": "LOS ARAUCANOS",
+          "normalizedBase": "LOS ARAUCANOS"
         },
         {
           "name": "LAGO CONGUILLIO",
-          "normalizedName": "LAGO CONGUILLIO"
+          "normalizedName": "LAGO CONGUILLIO",
+          "baseName": "LAGO CONGUILLIO",
+          "normalizedBase": "LAGO CONGUILLIO"
         },
         {
           "name": "LAGUNA ARCOIRIS",
-          "normalizedName": "LAGUNA ARCOIRIS"
+          "normalizedName": "LAGUNA ARCOIRIS",
+          "baseName": "LAGUNA ARCOIRIS",
+          "normalizedBase": "LAGUNA ARCOIRIS"
         },
         {
           "name": "LAGO COLICO",
-          "normalizedName": "LAGO COLICO"
+          "normalizedName": "LAGO COLICO",
+          "baseName": "LAGO COLICO",
+          "normalizedBase": "LAGO COLICO"
         },
         {
           "name": "ESTERO COICOMA",
-          "normalizedName": "ESTERO COICOMA"
+          "normalizedName": "ESTERO COICOMA",
+          "baseName": "ESTERO COICOMA",
+          "normalizedBase": "ESTERO COICOMA"
         },
         {
           "name": "9 DE JULIO",
-          "normalizedName": "9 DE JULIO"
+          "normalizedName": "9 DE JULIO",
+          "baseName": "9 DE JULIO",
+          "normalizedBase": "9 DE JULIO"
         },
         {
           "name": "ARTURO PRAT",
-          "normalizedName": "ARTURO PRAT"
+          "normalizedName": "ARTURO PRAT",
+          "baseName": "ARTURO PRAT",
+          "normalizedBase": "ARTURO PRAT"
         },
         {
           "name": "ESTERO POLUL",
-          "normalizedName": "ESTERO POLUL"
+          "normalizedName": "ESTERO POLUL",
+          "baseName": "ESTERO POLUL",
+          "normalizedBase": "ESTERO POLUL"
         },
         {
           "name": "CRISTOBAL COLON",
-          "normalizedName": "CRISTOBAL COLON"
+          "normalizedName": "CRISTOBAL COLON",
+          "baseName": "CRISTOBAL COLON",
+          "normalizedBase": "CRISTOBAL COLON"
         },
         {
           "name": "ESTERO PETRENCO",
-          "normalizedName": "ESTERO PETRENCO"
+          "normalizedName": "ESTERO PETRENCO",
+          "baseName": "ESTERO PETRENCO",
+          "normalizedBase": "ESTERO PETRENCO"
         },
         {
           "name": "PASAJE GABRIELA MISTRAL",
-          "normalizedName": "PASAJE GABRIELA MISTRAL"
+          "normalizedName": "PASAJE GABRIELA MISTRAL",
+          "baseName": "PASAJE GABRIELA MISTRAL",
+          "normalizedBase": "PASAJE GABRIELA MISTRAL"
         },
         {
           "name": "RAMON FREIRE",
-          "normalizedName": "RAMON FREIRE"
+          "normalizedName": "RAMON FREIRE",
+          "baseName": "RAMON FREIRE",
+          "normalizedBase": "RAMON FREIRE"
         },
         {
           "name": "RIO TOLTEN",
-          "normalizedName": "RIO TOLTEN"
+          "normalizedName": "RIO TOLTEN",
+          "baseName": "RIO TOLTEN",
+          "normalizedBase": "RIO TOLTEN"
         },
         {
           "name": "DGO. FAUSTINO SARMIENTO, MENOR DE 800",
-          "normalizedName": "DGO. FAUSTINO SARMIENTO, MENOR DE 800"
+          "normalizedName": "DGO. FAUSTINO SARMIENTO, MENOR DE 800",
+          "baseName": "DGO. FAUSTINO SARMIENTO",
+          "normalizedBase": "DGO. FAUSTINO SARMIENTO",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "GALVARINO RIVEROS, MENOR DE 800",
-          "normalizedName": "GALVARINO RIVEROS, MENOR DE 800"
+          "normalizedName": "GALVARINO RIVEROS, MENOR DE 800",
+          "baseName": "GALVARINO RIVEROS",
+          "normalizedBase": "GALVARINO RIVEROS",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "PATRICIO LYNCH, MENOR DE 800",
-          "normalizedName": "PATRICIO LYNCH, MENOR DE 800"
+          "normalizedName": "PATRICIO LYNCH, MENOR DE 800",
+          "baseName": "PATRICIO LYNCH",
+          "normalizedBase": "PATRICIO LYNCH",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "LOS CONQUISTADORES",
-          "normalizedName": "LOS CONQUISTADORES"
+          "normalizedName": "LOS CONQUISTADORES",
+          "baseName": "LOS CONQUISTADORES",
+          "normalizedBase": "LOS CONQUISTADORES"
         },
         {
           "name": "RIO PEDREGOSO",
-          "normalizedName": "RIO PEDREGOSO"
+          "normalizedName": "RIO PEDREGOSO",
+          "baseName": "RIO PEDREGOSO",
+          "normalizedBase": "RIO PEDREGOSO"
         },
         {
           "name": "BLANCO ENCALADA",
-          "normalizedName": "BLANCO ENCALADA"
+          "normalizedName": "BLANCO ENCALADA",
+          "baseName": "BLANCO ENCALADA",
+          "normalizedBase": "BLANCO ENCALADA"
         },
         {
           "name": "RIO DONGUIL",
-          "normalizedName": "RIO DONGUIL"
+          "normalizedName": "RIO DONGUIL",
+          "baseName": "RIO DONGUIL",
+          "normalizedBase": "RIO DONGUIL"
         },
         {
           "name": "LA REPUBLICA",
-          "normalizedName": "LA REPUBLICA"
+          "normalizedName": "LA REPUBLICA",
+          "baseName": "LA REPUBLICA",
+          "normalizedBase": "LA REPUBLICA"
         },
         {
           "name": "LAGUNA VERDE",
-          "normalizedName": "LAGUNA VERDE"
+          "normalizedName": "LAGUNA VERDE",
+          "baseName": "LAGUNA VERDE",
+          "normalizedBase": "LAGUNA VERDE"
         },
         {
           "name": "ESTERO MUNE",
-          "normalizedName": "ESTERO MUNE"
+          "normalizedName": "ESTERO MUNE",
+          "baseName": "ESTERO MUNE",
+          "normalizedBase": "ESTERO MUNE"
         },
         {
           "name": "TENIENTE MERINO",
-          "normalizedName": "TENIENTE MERINO"
+          "normalizedName": "TENIENTE MERINO",
+          "baseName": "TENIENTE MERINO",
+          "normalizedBase": "TENIENTE MERINO"
         },
         {
           "name": "CALLEJON ESSAR",
-          "normalizedName": "CALLEJON ESSAR"
+          "normalizedName": "CALLEJON ESSAR",
+          "baseName": "CALLEJON ESSAR",
+          "normalizedBase": "CALLEJON ESSAR"
         },
         {
           "name": "PASAJE LAS ACACIAS",
-          "normalizedName": "PASAJE LAS ACACIAS"
+          "normalizedName": "PASAJE LAS ACACIAS",
+          "baseName": "PASAJE LAS ACACIAS",
+          "normalizedBase": "PASAJE LAS ACACIAS"
         },
         {
           "name": "PASAJES LOS BOLDOS",
-          "normalizedName": "PASAJES LOS BOLDOS"
+          "normalizedName": "PASAJES LOS BOLDOS",
+          "baseName": "PASAJES LOS BOLDOS",
+          "normalizedBase": "PASAJES LOS BOLDOS"
         },
         {
           "name": "SARGENTO ALDEA",
-          "normalizedName": "SARGENTO ALDEA"
+          "normalizedName": "SARGENTO ALDEA",
+          "baseName": "SARGENTO ALDEA",
+          "normalizedBase": "SARGENTO ALDEA"
         },
         {
           "name": "PASAJE FERNANDO LOBOS",
-          "normalizedName": "PASAJE FERNANDO LOBOS"
+          "normalizedName": "PASAJE FERNANDO LOBOS",
+          "baseName": "PASAJE FERNANDO LOBOS",
+          "normalizedBase": "PASAJE FERNANDO LOBOS"
         },
         {
           "name": "PASAJE RAMON MOLINA",
-          "normalizedName": "PASAJE RAMON MOLINA"
+          "normalizedName": "PASAJE RAMON MOLINA",
+          "baseName": "PASAJE RAMON MOLINA",
+          "normalizedBase": "PASAJE RAMON MOLINA"
         },
         {
           "name": "RIO MAHUIDANCHE",
-          "normalizedName": "RIO MAHUIDANCHE"
+          "normalizedName": "RIO MAHUIDANCHE",
+          "baseName": "RIO MAHUIDANCHE",
+          "normalizedBase": "RIO MAHUIDANCHE"
         },
         {
           "name": "JUANITA AGUIRRE",
-          "normalizedName": "JUANITA AGUIRRE"
+          "normalizedName": "JUANITA AGUIRRE",
+          "baseName": "JUANITA AGUIRRE",
+          "normalizedBase": "JUANITA AGUIRRE"
         },
         {
           "name": "LORD COCHRANE, MENOR DE 800",
-          "normalizedName": "LORD COCHRANE, MENOR DE 800"
+          "normalizedName": "LORD COCHRANE, MENOR DE 800",
+          "baseName": "LORD COCHRANE",
+          "normalizedBase": "LORD COCHRANE",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "BERNARDO O'HIGGINS, MENOR DE 800",
-          "normalizedName": "BERNARDO O'HIGGINS, MENOR DE 800"
+          "normalizedName": "BERNARDO O'HIGGINS, MENOR DE 800",
+          "baseName": "BERNARDO O'HIGGINS",
+          "normalizedBase": "BERNARDO O'HIGGINS",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "MANUEL RODRÍGUEZ, MENOR DE 800",
-          "normalizedName": "MANUEL RODRIGUEZ, MENOR DE 800"
+          "normalizedName": "MANUEL RODRIGUEZ, MENOR DE 800",
+          "baseName": "MANUEL RODRÍGUEZ",
+          "normalizedBase": "MANUEL RODRIGUEZ",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "2 DE ENERO, MENOR DE 800",
-          "normalizedName": "2 DE ENERO, MENOR DE 800"
+          "normalizedName": "2 DE ENERO, MENOR DE 800",
+          "baseName": "2 DE ENERO",
+          "normalizedBase": "2 DE ENERO",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "JUAN AGUSTIN PALAZUELOS, MENOR DE 800",
-          "normalizedName": "JUAN AGUSTIN PALAZUELOS, MENOR DE 800"
+          "normalizedName": "JUAN AGUSTIN PALAZUELOS, MENOR DE 800",
+          "baseName": "JUAN AGUSTIN PALAZUELOS",
+          "normalizedBase": "JUAN AGUSTIN PALAZUELOS",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "EUSEBIO LILLO, MENOR DE 800",
-          "normalizedName": "EUSEBIO LILLO, MENOR DE 800"
+          "normalizedName": "EUSEBIO LILLO, MENOR DE 800",
+          "baseName": "EUSEBIO LILLO",
+          "normalizedBase": "EUSEBIO LILLO",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "CALLEJON PLOM",
-          "normalizedName": "CALLEJON PLOM"
+          "normalizedName": "CALLEJON PLOM",
+          "baseName": "CALLEJON PLOM",
+          "normalizedBase": "CALLEJON PLOM"
         },
         {
           "name": "BARROS ARANA",
-          "normalizedName": "BARROS ARANA"
+          "normalizedName": "BARROS ARANA",
+          "baseName": "BARROS ARANA",
+          "normalizedBase": "BARROS ARANA"
         },
         {
           "name": "JOSÉ MIGUEL CARRERA, MENOR DE 800",
-          "normalizedName": "JOSE MIGUEL CARRERA, MENOR DE 800"
+          "normalizedName": "JOSE MIGUEL CARRERA, MENOR DE 800",
+          "baseName": "JOSÉ MIGUEL CARRERA",
+          "normalizedBase": "JOSE MIGUEL CARRERA",
+          "range": {
+            "comparator": "lt",
+            "pivot": 800,
+            "label": "menor de 800"
+          }
         },
         {
           "name": "LAGO BUDI",
-          "normalizedName": "LAGO BUDI"
+          "normalizedName": "LAGO BUDI",
+          "baseName": "LAGO BUDI",
+          "normalizedBase": "LAGO BUDI"
         },
         {
           "name": "LOS LIBERTADORES",
-          "normalizedName": "LOS LIBERTADORES"
+          "normalizedName": "LOS LIBERTADORES",
+          "baseName": "LOS LIBERTADORES",
+          "normalizedBase": "LOS LIBERTADORES"
         },
         {
           "name": "MANUEL ANTONIO MATTA",
-          "normalizedName": "MANUEL ANTONIO MATTA"
+          "normalizedName": "MANUEL ANTONIO MATTA",
+          "baseName": "MANUEL ANTONIO MATTA",
+          "normalizedBase": "MANUEL ANTONIO MATTA"
         },
         {
           "name": "LOS ESPAÑOLES",
-          "normalizedName": "LOS ESPANOLES"
+          "normalizedName": "LOS ESPANOLES",
+          "baseName": "LOS ESPAÑOLES",
+          "normalizedBase": "LOS ESPANOLES"
         },
         {
           "name": "LAGO CABURGA",
-          "normalizedName": "LAGO CABURGA"
+          "normalizedName": "LAGO CABURGA",
+          "baseName": "LAGO CABURGA",
+          "normalizedBase": "LAGO CABURGA"
         },
         {
           "name": "LA COLONIA",
-          "normalizedName": "LA COLONIA"
+          "normalizedName": "LA COLONIA",
+          "baseName": "LA COLONIA",
+          "normalizedBase": "LA COLONIA"
         },
         {
           "name": "LISPERGUER",
-          "normalizedName": "LISPERGUER"
+          "normalizedName": "LISPERGUER",
+          "baseName": "LISPERGUER",
+          "normalizedBase": "LISPERGUER"
         },
         {
           "name": "DOMINGO SANTA MARIA",
-          "normalizedName": "DOMINGO SANTA MARIA"
+          "normalizedName": "DOMINGO SANTA MARIA",
+          "baseName": "DOMINGO SANTA MARIA",
+          "normalizedBase": "DOMINGO SANTA MARIA"
         },
         {
           "name": "ERNESTO RIQUELME",
-          "normalizedName": "ERNESTO RIQUELME"
+          "normalizedName": "ERNESTO RIQUELME",
+          "baseName": "ERNESTO RIQUELME",
+          "normalizedBase": "ERNESTO RIQUELME"
         },
         {
           "name": "SAN MARTIN",
-          "normalizedName": "SAN MARTIN"
+          "normalizedName": "SAN MARTIN",
+          "baseName": "SAN MARTIN",
+          "normalizedBase": "SAN MARTIN"
         },
         {
           "name": "SIMON BOLIVAR",
-          "normalizedName": "SIMON BOLIVAR"
+          "normalizedName": "SIMON BOLIVAR",
+          "baseName": "SIMON BOLIVAR",
+          "normalizedBase": "SIMON BOLIVAR"
         },
         {
           "name": "PAULA JARA QUEMADA",
-          "normalizedName": "PAULA JARA QUEMADA"
+          "normalizedName": "PAULA JARA QUEMADA",
+          "baseName": "PAULA JARA QUEMADA",
+          "normalizedBase": "PAULA JARA QUEMADA"
         },
         {
           "name": "LAGO CALAFQUEN",
-          "normalizedName": "LAGO CALAFQUEN"
+          "normalizedName": "LAGO CALAFQUEN",
+          "baseName": "LAGO CALAFQUEN",
+          "normalizedBase": "LAGO CALAFQUEN"
         },
         {
           "name": "CALLE NUEVA",
-          "normalizedName": "CALLE NUEVA"
+          "normalizedName": "CALLE NUEVA",
+          "baseName": "CALLE NUEVA",
+          "normalizedBase": "CALLE NUEVA"
         },
         {
           "name": "ESTERO CHADA",
-          "normalizedName": "ESTERO CHADA"
+          "normalizedName": "ESTERO CHADA",
+          "baseName": "ESTERO CHADA",
+          "normalizedBase": "ESTERO CHADA"
         },
         {
           "name": "ANIBAL PINTO",
-          "normalizedName": "ANIBAL PINTO"
+          "normalizedName": "ANIBAL PINTO",
+          "baseName": "ANIBAL PINTO",
+          "normalizedBase": "ANIBAL PINTO"
         },
         {
           "name": "ARTURO PEREZ CANTO",
-          "normalizedName": "ARTURO PEREZ CANTO"
+          "normalizedName": "ARTURO PEREZ CANTO",
+          "baseName": "ARTURO PEREZ CANTO",
+          "normalizedBase": "ARTURO PEREZ CANTO"
         },
         {
           "name": "BALMACEDA",
-          "normalizedName": "BALMACEDA"
+          "normalizedName": "BALMACEDA",
+          "baseName": "BALMACEDA",
+          "normalizedBase": "BALMACEDA"
         },
         {
           "name": "DANUBIO",
-          "normalizedName": "DANUBIO"
+          "normalizedName": "DANUBIO",
+          "baseName": "DANUBIO",
+          "normalizedBase": "DANUBIO"
         },
         {
           "name": "DRAVA",
-          "normalizedName": "DRAVA"
+          "normalizedName": "DRAVA",
+          "baseName": "DRAVA",
+          "normalizedBase": "DRAVA"
         },
         {
           "name": "EL ARRAYAN",
-          "normalizedName": "EL ARRAYAN"
+          "normalizedName": "EL ARRAYAN",
+          "baseName": "EL ARRAYAN",
+          "normalizedBase": "EL ARRAYAN"
         },
         {
           "name": "FRANCISCO BILBAO",
-          "normalizedName": "FRANCISCO BILBAO"
+          "normalizedName": "FRANCISCO BILBAO",
+          "baseName": "FRANCISCO BILBAO",
+          "normalizedBase": "FRANCISCO BILBAO"
         },
         {
           "name": "LOS AROMOS",
-          "normalizedName": "LOS AROMOS"
+          "normalizedName": "LOS AROMOS",
+          "baseName": "LOS AROMOS",
+          "normalizedBase": "LOS AROMOS"
         },
         {
           "name": "LOS AVELLANOS",
-          "normalizedName": "LOS AVELLANOS"
+          "normalizedName": "LOS AVELLANOS",
+          "baseName": "LOS AVELLANOS",
+          "normalizedBase": "LOS AVELLANOS"
         },
         {
           "name": "LOS CEREZOS",
-          "normalizedName": "LOS CEREZOS"
+          "normalizedName": "LOS CEREZOS",
+          "baseName": "LOS CEREZOS",
+          "normalizedBase": "LOS CEREZOS"
         },
         {
           "name": "LOS HUALLES",
-          "normalizedName": "LOS HUALLES"
+          "normalizedName": "LOS HUALLES",
+          "baseName": "LOS HUALLES",
+          "normalizedBase": "LOS HUALLES"
         },
         {
           "name": "LOS NARANJOS",
-          "normalizedName": "LOS NARANJOS"
+          "normalizedName": "LOS NARANJOS",
+          "baseName": "LOS NARANJOS",
+          "normalizedBase": "LOS NARANJOS"
         },
         {
           "name": "LOS NOGALES",
-          "normalizedName": "LOS NOGALES"
+          "normalizedName": "LOS NOGALES",
+          "baseName": "LOS NOGALES",
+          "normalizedBase": "LOS NOGALES"
         },
         {
           "name": "LOS OLIVOS",
-          "normalizedName": "LOS OLIVOS"
+          "normalizedName": "LOS OLIVOS",
+          "baseName": "LOS OLIVOS",
+          "normalizedBase": "LOS OLIVOS"
         },
         {
           "name": "LOS TILOS",
-          "normalizedName": "LOS TILOS"
+          "normalizedName": "LOS TILOS",
+          "baseName": "LOS TILOS",
+          "normalizedBase": "LOS TILOS"
         },
         {
           "name": "LUIS CRUZ MARTINEZ",
-          "normalizedName": "LUIS CRUZ MARTINEZ"
+          "normalizedName": "LUIS CRUZ MARTINEZ",
+          "baseName": "LUIS CRUZ MARTINEZ",
+          "normalizedBase": "LUIS CRUZ MARTINEZ"
         },
         {
           "name": "TISA",
-          "normalizedName": "TISA"
+          "normalizedName": "TISA",
+          "baseName": "TISA",
+          "normalizedBase": "TISA"
         }
       ]
     },
@@ -410,451 +693,760 @@
       "streets": [
         {
           "name": "MILLAHUIN",
-          "normalizedName": "MILLAHUIN"
+          "normalizedName": "MILLAHUIN",
+          "baseName": "MILLAHUIN",
+          "normalizedBase": "MILLAHUIN"
         },
         {
           "name": "NICANOR PARRA",
-          "normalizedName": "NICANOR PARRA"
+          "normalizedName": "NICANOR PARRA",
+          "baseName": "NICANOR PARRA",
+          "normalizedBase": "NICANOR PARRA"
         },
         {
           "name": "VOLCAN VILLARRICA",
-          "normalizedName": "VOLCAN VILLARRICA"
+          "normalizedName": "VOLCAN VILLARRICA",
+          "baseName": "VOLCAN VILLARRICA",
+          "normalizedBase": "VOLCAN VILLARRICA"
         },
         {
           "name": "JORGE TELLIER",
-          "normalizedName": "JORGE TELLIER"
+          "normalizedName": "JORGE TELLIER",
+          "baseName": "JORGE TELLIER",
+          "normalizedBase": "JORGE TELLIER"
         },
         {
           "name": "GENERAL BAQUEDANO, MAYOR DE 800",
-          "normalizedName": "GENERAL BAQUEDANO, MAYOR DE 800"
+          "normalizedName": "GENERAL BAQUEDANO, MAYOR DE 800",
+          "baseName": "GENERAL BAQUEDANO",
+          "normalizedBase": "GENERAL BAQUEDANO",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "ANDRÉS BELLO, MAYOR DE 800",
-          "normalizedName": "ANDRES BELLO, MAYOR DE 800"
+          "normalizedName": "ANDRES BELLO, MAYOR DE 800",
+          "baseName": "ANDRÉS BELLO",
+          "normalizedBase": "ANDRES BELLO",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "5 DE ABRIL, MAYOR DE 800",
-          "normalizedName": "5 DE ABRIL, MAYOR DE 800"
+          "normalizedName": "5 DE ABRIL, MAYOR DE 800",
+          "baseName": "5 DE ABRIL",
+          "normalizedBase": "5 DE ABRIL",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "18 DE SEPTIEMBRE, MAYOR 800",
-          "normalizedName": "18 DE SEPTIEMBRE, MAYOR 800"
+          "normalizedName": "18 DE SEPTIEMBRE, MAYOR 800",
+          "baseName": "18 DE SEPTIEMBRE",
+          "normalizedBase": "18 DE SEPTIEMBRE",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "21 DE MAYO, MAYOR DE 800",
-          "normalizedName": "21 DE MAYO, MAYOR DE 800"
+          "normalizedName": "21 DE MAYO, MAYOR DE 800",
+          "baseName": "21 DE MAYO",
+          "normalizedBase": "21 DE MAYO",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "12 DE FEBRERO, MAYOR DE 800",
-          "normalizedName": "12 DE FEBRERO, MAYOR DE 800"
+          "normalizedName": "12 DE FEBRERO, MAYOR DE 800",
+          "baseName": "12 DE FEBRERO",
+          "normalizedBase": "12 DE FEBRERO",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "VICUÑA MACKENNA, MAYOR DE 800",
-          "normalizedName": "VICUNA MACKENNA, MAYOR DE 800"
+          "normalizedName": "VICUNA MACKENNA, MAYOR DE 800",
+          "baseName": "VICUÑA MACKENNA",
+          "normalizedBase": "VICUNA MACKENNA",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "FRANCISCO COLOANE",
-          "normalizedName": "FRANCISCO COLOANE"
+          "normalizedName": "FRANCISCO COLOANE",
+          "baseName": "FRANCISCO COLOANE",
+          "normalizedBase": "FRANCISCO COLOANE"
         },
         {
           "name": "CAMINO VILLARRICA",
-          "normalizedName": "CAMINO VILLARRICA"
+          "normalizedName": "CAMINO VILLARRICA",
+          "baseName": "CAMINO VILLARRICA",
+          "normalizedBase": "CAMINO VILLARRICA"
         },
         {
           "name": "MARIA CORONADO",
-          "normalizedName": "MARIA CORONADO"
+          "normalizedName": "MARIA CORONADO",
+          "baseName": "MARIA CORONADO",
+          "normalizedBase": "MARIA CORONADO"
         },
         {
           "name": "SAN SEBASTIAN",
-          "normalizedName": "SAN SEBASTIAN"
+          "normalizedName": "SAN SEBASTIAN",
+          "baseName": "SAN SEBASTIAN",
+          "normalizedBase": "SAN SEBASTIAN"
         },
         {
           "name": "FRESIA",
-          "normalizedName": "FRESIA"
+          "normalizedName": "FRESIA",
+          "baseName": "FRESIA",
+          "normalizedBase": "FRESIA"
         },
         {
           "name": "MUNE",
-          "normalizedName": "MUNE"
+          "normalizedName": "MUNE",
+          "baseName": "MUNE",
+          "normalizedBase": "MUNE"
         },
         {
           "name": "COICOMA",
-          "normalizedName": "COICOMA"
+          "normalizedName": "COICOMA",
+          "baseName": "COICOMA",
+          "normalizedBase": "COICOMA"
         },
         {
           "name": "GUACOLDA",
-          "normalizedName": "GUACOLDA"
+          "normalizedName": "GUACOLDA",
+          "baseName": "GUACOLDA",
+          "normalizedBase": "GUACOLDA"
         },
         {
           "name": "CARILAFQUEN",
-          "normalizedName": "CARILAFQUEN"
+          "normalizedName": "CARILAFQUEN",
+          "baseName": "CARILAFQUEN",
+          "normalizedBase": "CARILAFQUEN"
         },
         {
           "name": "CELEDONIO ROMERO ROMERO",
-          "normalizedName": "CELEDONIO ROMERO ROMERO"
+          "normalizedName": "CELEDONIO ROMERO ROMERO",
+          "baseName": "CELEDONIO ROMERO ROMERO",
+          "normalizedBase": "CELEDONIO ROMERO ROMERO"
         },
         {
           "name": "JULIO DUMONT BARRA",
-          "normalizedName": "JULIO DUMONT BARRA"
+          "normalizedName": "JULIO DUMONT BARRA",
+          "baseName": "JULIO DUMONT BARRA",
+          "normalizedBase": "JULIO DUMONT BARRA"
         },
         {
           "name": "TUCAPEL",
-          "normalizedName": "TUCAPEL"
+          "normalizedName": "TUCAPEL",
+          "baseName": "TUCAPEL",
+          "normalizedBase": "TUCAPEL"
         },
         {
           "name": "QUILAPAN",
-          "normalizedName": "QUILAPAN"
+          "normalizedName": "QUILAPAN",
+          "baseName": "QUILAPAN",
+          "normalizedBase": "QUILAPAN"
         },
         {
           "name": "MARILUAN",
-          "normalizedName": "MARILUAN"
+          "normalizedName": "MARILUAN",
+          "baseName": "MARILUAN",
+          "normalizedBase": "MARILUAN"
         },
         {
           "name": "COLO COLO",
-          "normalizedName": "COLO COLO"
+          "normalizedName": "COLO COLO",
+          "baseName": "COLO COLO",
+          "normalizedBase": "COLO COLO"
         },
         {
           "name": "LAS MARGARITAS",
-          "normalizedName": "LAS MARGARITAS"
+          "normalizedName": "LAS MARGARITAS",
+          "baseName": "LAS MARGARITAS",
+          "normalizedBase": "LAS MARGARITAS"
         },
         {
           "name": "JUAN NORAMBUENA",
-          "normalizedName": "JUAN NORAMBUENA"
+          "normalizedName": "JUAN NORAMBUENA",
+          "baseName": "JUAN NORAMBUENA",
+          "normalizedBase": "JUAN NORAMBUENA"
         },
         {
           "name": "LAURA VICUÑA",
-          "normalizedName": "LAURA VICUNA"
+          "normalizedName": "LAURA VICUNA",
+          "baseName": "LAURA VICUÑA",
+          "normalizedBase": "LAURA VICUNA"
         },
         {
           "name": "GREGORIO FUENTES SALAMANCA",
-          "normalizedName": "GREGORIO FUENTES SALAMANCA"
+          "normalizedName": "GREGORIO FUENTES SALAMANCA",
+          "baseName": "GREGORIO FUENTES SALAMANCA",
+          "normalizedBase": "GREGORIO FUENTES SALAMANCA"
         },
         {
           "name": "VOLCAN LONQUIMAY",
-          "normalizedName": "VOLCAN LONQUIMAY"
+          "normalizedName": "VOLCAN LONQUIMAY",
+          "baseName": "VOLCAN LONQUIMAY",
+          "normalizedBase": "VOLCAN LONQUIMAY"
         },
         {
           "name": "PABLO NERUDA",
-          "normalizedName": "PABLO NERUDA"
+          "normalizedName": "PABLO NERUDA",
+          "baseName": "PABLO NERUDA",
+          "normalizedBase": "PABLO NERUDA"
         },
         {
           "name": "PABLO SIMONETTI",
-          "normalizedName": "PABLO SIMONETTI"
+          "normalizedName": "PABLO SIMONETTI",
+          "baseName": "PABLO SIMONETTI",
+          "normalizedBase": "PABLO SIMONETTI"
         },
         {
           "name": "JACQUELINE ROMERO",
-          "normalizedName": "JACQUELINE ROMERO"
+          "normalizedName": "JACQUELINE ROMERO",
+          "baseName": "JACQUELINE ROMERO",
+          "normalizedBase": "JACQUELINE ROMERO"
         },
         {
           "name": "VICTOR JARA",
-          "normalizedName": "VICTOR JARA"
+          "normalizedName": "VICTOR JARA",
+          "baseName": "VICTOR JARA",
+          "normalizedBase": "VICTOR JARA"
         },
         {
           "name": "VOLCAN LANIN",
-          "normalizedName": "VOLCAN LANIN"
+          "normalizedName": "VOLCAN LANIN",
+          "baseName": "VOLCAN LANIN",
+          "normalizedBase": "VOLCAN LANIN"
         },
         {
           "name": "LOICA",
-          "normalizedName": "LOICA"
+          "normalizedName": "LOICA",
+          "baseName": "LOICA",
+          "normalizedBase": "LOICA"
         },
         {
           "name": "RENE INOSTROZA",
-          "normalizedName": "RENE INOSTROZA"
+          "normalizedName": "RENE INOSTROZA",
+          "baseName": "RENE INOSTROZA",
+          "normalizedBase": "RENE INOSTROZA"
         },
         {
           "name": "SILVIA SANHUEZA",
-          "normalizedName": "SILVIA SANHUEZA"
+          "normalizedName": "SILVIA SANHUEZA",
+          "baseName": "SILVIA SANHUEZA",
+          "normalizedBase": "SILVIA SANHUEZA"
         },
         {
           "name": "DGO. FAUSTINO SARMIENTO, MAYOR DE 800",
-          "normalizedName": "DGO. FAUSTINO SARMIENTO, MAYOR DE 800"
+          "normalizedName": "DGO. FAUSTINO SARMIENTO, MAYOR DE 800",
+          "baseName": "DGO. FAUSTINO SARMIENTO",
+          "normalizedBase": "DGO. FAUSTINO SARMIENTO",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "GALVARINO RIVEROS, MAYOR DE 800",
-          "normalizedName": "GALVARINO RIVEROS, MAYOR DE 800"
+          "normalizedName": "GALVARINO RIVEROS, MAYOR DE 800",
+          "baseName": "GALVARINO RIVEROS",
+          "normalizedBase": "GALVARINO RIVEROS",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "PATRICIO LYNCH, MAYOR DE 800",
-          "normalizedName": "PATRICIO LYNCH, MAYOR DE 800"
+          "normalizedName": "PATRICIO LYNCH, MAYOR DE 800",
+          "baseName": "PATRICIO LYNCH",
+          "normalizedBase": "PATRICIO LYNCH",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "LOS GLADIOLOS",
-          "normalizedName": "LOS GLADIOLOS"
+          "normalizedName": "LOS GLADIOLOS",
+          "baseName": "LOS GLADIOLOS",
+          "normalizedBase": "LOS GLADIOLOS"
         },
         {
           "name": "VOLCAN LLAIMA",
-          "normalizedName": "VOLCAN LLAIMA"
+          "normalizedName": "VOLCAN LLAIMA",
+          "baseName": "VOLCAN LLAIMA",
+          "normalizedBase": "VOLCAN LLAIMA"
         },
         {
           "name": "PASAJE TRANCURA",
-          "normalizedName": "PASAJE TRANCURA"
+          "normalizedName": "PASAJE TRANCURA",
+          "baseName": "PASAJE TRANCURA",
+          "normalizedBase": "PASAJE TRANCURA"
         },
         {
           "name": "SAN LUCAS",
-          "normalizedName": "SAN LUCAS"
+          "normalizedName": "SAN LUCAS",
+          "baseName": "SAN LUCAS",
+          "normalizedBase": "SAN LUCAS"
         },
         {
           "name": "LAS VIOLETAS",
-          "normalizedName": "LAS VIOLETAS"
+          "normalizedName": "LAS VIOLETAS",
+          "baseName": "LAS VIOLETAS",
+          "normalizedBase": "LAS VIOLETAS"
         },
         {
           "name": "SANTA BERNARDITA",
-          "normalizedName": "SANTA BERNARDITA"
+          "normalizedName": "SANTA BERNARDITA",
+          "baseName": "SANTA BERNARDITA",
+          "normalizedBase": "SANTA BERNARDITA"
         },
         {
           "name": "VOLCAN TOLHUACA",
-          "normalizedName": "VOLCAN TOLHUACA"
+          "normalizedName": "VOLCAN TOLHUACA",
+          "baseName": "VOLCAN TOLHUACA",
+          "normalizedBase": "VOLCAN TOLHUACA"
         },
         {
           "name": "DIMAS TAPIA",
-          "normalizedName": "DIMAS TAPIA"
+          "normalizedName": "DIMAS TAPIA",
+          "baseName": "DIMAS TAPIA",
+          "normalizedBase": "DIMAS TAPIA"
         },
         {
           "name": "VICENTE HUIDOBRO",
-          "normalizedName": "VICENTE HUIDOBRO"
+          "normalizedName": "VICENTE HUIDOBRO",
+          "baseName": "VICENTE HUIDOBRO",
+          "normalizedBase": "VICENTE HUIDOBRO"
         },
         {
           "name": "PEDRO LEON GALLO SUR",
-          "normalizedName": "PEDRO LEON GALLO SUR"
+          "normalizedName": "PEDRO LEON GALLO SUR",
+          "baseName": "PEDRO LEON GALLO SUR",
+          "normalizedBase": "PEDRO LEON GALLO SUR"
         },
         {
           "name": "CAUPOLICAN",
-          "normalizedName": "CAUPOLICAN"
+          "normalizedName": "CAUPOLICAN",
+          "baseName": "CAUPOLICAN",
+          "normalizedBase": "CAUPOLICAN"
         },
         {
           "name": "LAUTARO",
-          "normalizedName": "LAUTARO"
+          "normalizedName": "LAUTARO",
+          "baseName": "LAUTARO",
+          "normalizedBase": "LAUTARO"
         },
         {
           "name": "ELEUTERIO RAMIREZ",
-          "normalizedName": "ELEUTERIO RAMIREZ"
+          "normalizedName": "ELEUTERIO RAMIREZ",
+          "baseName": "ELEUTERIO RAMIREZ",
+          "normalizedBase": "ELEUTERIO RAMIREZ"
         },
         {
           "name": "MICHIMALONCO",
-          "normalizedName": "MICHIMALONCO"
+          "normalizedName": "MICHIMALONCO",
+          "baseName": "MICHIMALONCO",
+          "normalizedBase": "MICHIMALONCO"
         },
         {
           "name": "SAN MATEO",
-          "normalizedName": "SAN MATEO"
+          "normalizedName": "SAN MATEO",
+          "baseName": "SAN MATEO",
+          "normalizedBase": "SAN MATEO"
         },
         {
           "name": "COIPUE",
-          "normalizedName": "COIPUE"
+          "normalizedName": "COIPUE",
+          "baseName": "COIPUE",
+          "normalizedBase": "COIPUE"
         },
         {
           "name": "LORD COCHRANE, MAYOR DE 800",
-          "normalizedName": "LORD COCHRANE, MAYOR DE 800"
+          "normalizedName": "LORD COCHRANE, MAYOR DE 800",
+          "baseName": "LORD COCHRANE",
+          "normalizedBase": "LORD COCHRANE",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "BERNARDO O'HIGGINS, MAYOR DE 800",
-          "normalizedName": "BERNARDO O'HIGGINS, MAYOR DE 800"
+          "normalizedName": "BERNARDO O'HIGGINS, MAYOR DE 800",
+          "baseName": "BERNARDO O'HIGGINS",
+          "normalizedBase": "BERNARDO O'HIGGINS",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "MANUEL RODRÍGUEZ, MAYOR DE 800",
-          "normalizedName": "MANUEL RODRIGUEZ, MAYOR DE 800"
+          "normalizedName": "MANUEL RODRIGUEZ, MAYOR DE 800",
+          "baseName": "MANUEL RODRÍGUEZ",
+          "normalizedBase": "MANUEL RODRIGUEZ",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "2 DE ENERO, MAYOR DE 800",
-          "normalizedName": "2 DE ENERO, MAYOR DE 800"
+          "normalizedName": "2 DE ENERO, MAYOR DE 800",
+          "baseName": "2 DE ENERO",
+          "normalizedBase": "2 DE ENERO",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "JUAN AGUSTIN PALAZUELOS, MAYORDE 800",
-          "normalizedName": "JUAN AGUSTIN PALAZUELOS, MAYORDE 800"
+          "normalizedName": "JUAN AGUSTIN PALAZUELOS, MAYORDE 800",
+          "baseName": "JUAN AGUSTIN PALAZUELOS",
+          "normalizedBase": "JUAN AGUSTIN PALAZUELOS",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "EUSEBIO LILLO, MAYOR DE 800",
-          "normalizedName": "EUSEBIO LILLO, MAYOR DE 800"
+          "normalizedName": "EUSEBIO LILLO, MAYOR DE 800",
+          "baseName": "EUSEBIO LILLO",
+          "normalizedBase": "EUSEBIO LILLO",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "AVENIDA GABRIELA MISTRAL",
-          "normalizedName": "AVENIDA GABRIELA MISTRAL"
+          "normalizedName": "AVENIDA GABRIELA MISTRAL",
+          "baseName": "AVENIDA GABRIELA MISTRAL",
+          "normalizedBase": "AVENIDA GABRIELA MISTRAL"
         },
         {
           "name": "BARROS ARANA",
-          "normalizedName": "BARROS ARANA"
+          "normalizedName": "BARROS ARANA",
+          "baseName": "BARROS ARANA",
+          "normalizedBase": "BARROS ARANA"
         },
         {
           "name": "JOSÉ MIGUEL CARRERA, MAYOR DE 800",
-          "normalizedName": "JOSE MIGUEL CARRERA, MAYOR DE 800"
+          "normalizedName": "JOSE MIGUEL CARRERA, MAYOR DE 800",
+          "baseName": "JOSÉ MIGUEL CARRERA",
+          "normalizedBase": "JOSE MIGUEL CARRERA",
+          "range": {
+            "comparator": "gte",
+            "pivot": 800,
+            "label": "mayor de 800"
+          }
         },
         {
           "name": "PADRE ALBERTO HURTADO",
-          "normalizedName": "PADRE ALBERTO HURTADO"
+          "normalizedName": "PADRE ALBERTO HURTADO",
+          "baseName": "PADRE ALBERTO HURTADO",
+          "normalizedBase": "PADRE ALBERTO HURTADO"
         },
         {
           "name": "AMBROSIO PAILLALEF",
-          "normalizedName": "AMBROSIO PAILLALEF"
+          "normalizedName": "AMBROSIO PAILLALEF",
+          "baseName": "AMBROSIO PAILLALEF",
+          "normalizedBase": "AMBROSIO PAILLALEF"
         },
         {
           "name": "ANTONIO SKARMETA",
-          "normalizedName": "ANTONIO SKARMETA"
+          "normalizedName": "ANTONIO SKARMETA",
+          "baseName": "ANTONIO SKARMETA",
+          "normalizedBase": "ANTONIO SKARMETA"
         },
         {
           "name": "TITO FERNANDEZ",
-          "normalizedName": "TITO FERNANDEZ"
+          "normalizedName": "TITO FERNANDEZ",
+          "baseName": "TITO FERNANDEZ",
+          "normalizedBase": "TITO FERNANDEZ"
         },
         {
           "name": "IVAN NIEDMAN FREY",
-          "normalizedName": "IVAN NIEDMAN FREY"
+          "normalizedName": "IVAN NIEDMAN FREY",
+          "baseName": "IVAN NIEDMAN FREY",
+          "normalizedBase": "IVAN NIEDMAN FREY"
         },
         {
           "name": "VIOLETA PARRA",
-          "normalizedName": "VIOLETA PARRA"
+          "normalizedName": "VIOLETA PARRA",
+          "baseName": "VIOLETA PARRA",
+          "normalizedBase": "VIOLETA PARRA"
         },
         {
           "name": "COVADONGA",
-          "normalizedName": "COVADONGA"
+          "normalizedName": "COVADONGA",
+          "baseName": "COVADONGA",
+          "normalizedBase": "COVADONGA"
         },
         {
           "name": "ESMERALDA",
-          "normalizedName": "ESMERALDA"
+          "normalizedName": "ESMERALDA",
+          "baseName": "ESMERALDA",
+          "normalizedBase": "ESMERALDA"
         },
         {
           "name": "PASAJE B",
-          "normalizedName": "PASAJE B"
+          "normalizedName": "PASAJE B",
+          "baseName": "PASAJE B",
+          "normalizedBase": "PASAJE B"
         },
         {
           "name": "PASAJE A",
-          "normalizedName": "PASAJE A"
+          "normalizedName": "PASAJE A",
+          "baseName": "PASAJE A",
+          "normalizedBase": "PASAJE A"
         },
         {
           "name": "LONCO MARTIN SALAZAR",
-          "normalizedName": "LONCO MARTIN SALAZAR"
+          "normalizedName": "LONCO MARTIN SALAZAR",
+          "baseName": "LONCO MARTIN SALAZAR",
+          "normalizedBase": "LONCO MARTIN SALAZAR"
         },
         {
           "name": "LEONEL LIENLAF",
-          "normalizedName": "LEONEL LIENLAF"
+          "normalizedName": "LEONEL LIENLAF",
+          "baseName": "LEONEL LIENLAF",
+          "normalizedBase": "LEONEL LIENLAF"
         },
         {
           "name": "DAVID SALVO FREDERICKSEN",
-          "normalizedName": "DAVID SALVO FREDERICKSEN"
+          "normalizedName": "DAVID SALVO FREDERICKSEN",
+          "baseName": "DAVID SALVO FREDERICKSEN",
+          "normalizedBase": "DAVID SALVO FREDERICKSEN"
         },
         {
           "name": "LONCO JANEQUEO",
-          "normalizedName": "LONCO JANEQUEO"
+          "normalizedName": "LONCO JANEQUEO",
+          "baseName": "LONCO JANEQUEO",
+          "normalizedBase": "LONCO JANEQUEO"
         },
         {
           "name": "CALLE TODOS LOS SANTOS",
-          "normalizedName": "CALLE TODOS LOS SANTOS"
+          "normalizedName": "CALLE TODOS LOS SANTOS",
+          "baseName": "CALLE TODOS LOS SANTOS",
+          "normalizedBase": "CALLE TODOS LOS SANTOS"
         },
         {
           "name": "QUILQUILCO",
-          "normalizedName": "QUILQUILCO"
+          "normalizedName": "QUILQUILCO",
+          "baseName": "QUILQUILCO",
+          "normalizedBase": "QUILQUILCO"
         },
         {
           "name": "ALTO MIRADOR",
-          "normalizedName": "ALTO MIRADOR"
+          "normalizedName": "ALTO MIRADOR",
+          "baseName": "ALTO MIRADOR",
+          "normalizedBase": "ALTO MIRADOR"
         },
         {
           "name": "COLGA",
-          "normalizedName": "COLGA"
+          "normalizedName": "COLGA",
+          "baseName": "COLGA",
+          "normalizedBase": "COLGA"
         },
         {
           "name": "FUNDO LA LLAVE",
-          "normalizedName": "FUNDO LA LLAVE"
+          "normalizedName": "FUNDO LA LLAVE",
+          "baseName": "FUNDO LA LLAVE",
+          "normalizedBase": "FUNDO LA LLAVE"
         },
         {
           "name": "QUECHUCO",
-          "normalizedName": "QUECHUCO"
+          "normalizedName": "QUECHUCO",
+          "baseName": "QUECHUCO",
+          "normalizedBase": "QUECHUCO"
         },
         {
           "name": "PETRENCO",
-          "normalizedName": "PETRENCO"
+          "normalizedName": "PETRENCO",
+          "baseName": "PETRENCO",
+          "normalizedBase": "PETRENCO"
         },
         {
           "name": "POLUL",
-          "normalizedName": "POLUL"
+          "normalizedName": "POLUL",
+          "baseName": "POLUL",
+          "normalizedBase": "POLUL"
         },
         {
           "name": "VARIANTE BORNAND",
-          "normalizedName": "VARIANTE BORNAND"
+          "normalizedName": "VARIANTE BORNAND",
+          "baseName": "VARIANTE BORNAND",
+          "normalizedBase": "VARIANTE BORNAND"
         },
         {
           "name": "TRES ESQUINAS",
-          "normalizedName": "TRES ESQUINAS"
+          "normalizedName": "TRES ESQUINAS",
+          "baseName": "TRES ESQUINAS",
+          "normalizedBase": "TRES ESQUINAS"
         },
         {
           "name": "LOS CANELOS",
-          "normalizedName": "LOS CANELOS"
+          "normalizedName": "LOS CANELOS",
+          "baseName": "LOS CANELOS",
+          "normalizedBase": "LOS CANELOS"
         },
         {
           "name": "LOS CIPRECES",
-          "normalizedName": "LOS CIPRECES"
+          "normalizedName": "LOS CIPRECES",
+          "baseName": "LOS CIPRECES",
+          "normalizedBase": "LOS CIPRECES"
         },
         {
           "name": "TIL TIL",
-          "normalizedName": "TIL TIL"
+          "normalizedName": "TIL TIL",
+          "baseName": "TIL TIL",
+          "normalizedBase": "TIL TIL"
         },
         {
           "name": "LAS HIGUERAS",
-          "normalizedName": "LAS HIGUERAS"
+          "normalizedName": "LAS HIGUERAS",
+          "baseName": "LAS HIGUERAS",
+          "normalizedBase": "LAS HIGUERAS"
         },
         {
           "name": "NOMEHUENCUL",
-          "normalizedName": "NOMEHUENCUL"
+          "normalizedName": "NOMEHUENCUL",
+          "baseName": "NOMEHUENCUL",
+          "normalizedBase": "NOMEHUENCUL"
         },
         {
           "name": "FUNDO QUELEN QUELEN",
-          "normalizedName": "FUNDO QUELEN QUELEN"
+          "normalizedName": "FUNDO QUELEN QUELEN",
+          "baseName": "FUNDO QUELEN QUELEN",
+          "normalizedBase": "FUNDO QUELEN QUELEN"
         },
         {
           "name": "PURAQUINA",
-          "normalizedName": "PURAQUINA"
+          "normalizedName": "PURAQUINA",
+          "baseName": "PURAQUINA",
+          "normalizedBase": "PURAQUINA"
         },
         {
           "name": "CORTE ALTO",
-          "normalizedName": "CORTE ALTO"
+          "normalizedName": "CORTE ALTO",
+          "baseName": "CORTE ALTO",
+          "normalizedBase": "CORTE ALTO"
         },
         {
           "name": "CALLE NUEVA 6",
-          "normalizedName": "CALLE NUEVA 6"
+          "normalizedName": "CALLE NUEVA 6",
+          "baseName": "CALLE NUEVA 6",
+          "normalizedBase": "CALLE NUEVA 6"
         },
         {
           "name": "INOCO",
-          "normalizedName": "INOCO"
+          "normalizedName": "INOCO",
+          "baseName": "INOCO",
+          "normalizedBase": "INOCO"
         },
         {
           "name": "LOS ALELIES",
-          "normalizedName": "LOS ALELIES"
+          "normalizedName": "LOS ALELIES",
+          "baseName": "LOS ALELIES",
+          "normalizedBase": "LOS ALELIES"
         },
         {
           "name": "LOS COPIHUES",
-          "normalizedName": "LOS COPIHUES"
+          "normalizedName": "LOS COPIHUES",
+          "baseName": "LOS COPIHUES",
+          "normalizedBase": "LOS COPIHUES"
         },
         {
           "name": "LOS FUNDADORES",
-          "normalizedName": "LOS FUNDADORES"
+          "normalizedName": "LOS FUNDADORES",
+          "baseName": "LOS FUNDADORES",
+          "normalizedBase": "LOS FUNDADORES"
         },
         {
           "name": "LOS GIRASOLES",
-          "normalizedName": "LOS GIRASOLES"
+          "normalizedName": "LOS GIRASOLES",
+          "baseName": "LOS GIRASOLES",
+          "normalizedBase": "LOS GIRASOLES"
         },
         {
           "name": "LOS LIRIOS",
-          "normalizedName": "LOS LIRIOS"
+          "normalizedName": "LOS LIRIOS",
+          "baseName": "LOS LIRIOS",
+          "normalizedBase": "LOS LIRIOS"
         },
         {
           "name": "LOS PENSAMIENTOS",
-          "normalizedName": "LOS PENSAMIENTOS"
+          "normalizedName": "LOS PENSAMIENTOS",
+          "baseName": "LOS PENSAMIENTOS",
+          "normalizedBase": "LOS PENSAMIENTOS"
         },
         {
           "name": "MANZANAL",
-          "normalizedName": "MANZANAL"
+          "normalizedName": "MANZANAL",
+          "baseName": "MANZANAL",
+          "normalizedBase": "MANZANAL"
         },
         {
           "name": "PANAMERICANA",
-          "normalizedName": "PANAMERICANA"
+          "normalizedName": "PANAMERICANA",
+          "baseName": "PANAMERICANA",
+          "normalizedBase": "PANAMERICANA"
         },
         {
           "name": "PASAJE NUEVO 15",
-          "normalizedName": "PASAJE NUEVO 15"
+          "normalizedName": "PASAJE NUEVO 15",
+          "baseName": "PASAJE NUEVO 15",
+          "normalizedBase": "PASAJE NUEVO 15"
         },
         {
           "name": "PASAJE NUEVO 17",
-          "normalizedName": "PASAJE NUEVO 17"
+          "normalizedName": "PASAJE NUEVO 17",
+          "baseName": "PASAJE NUEVO 17",
+          "normalizedBase": "PASAJE NUEVO 17"
         },
         {
           "name": "PASAJE NUEVO 21",
-          "normalizedName": "PASAJE NUEVO 21"
+          "normalizedName": "PASAJE NUEVO 21",
+          "baseName": "PASAJE NUEVO 21",
+          "normalizedBase": "PASAJE NUEVO 21"
         }
       ]
     },
@@ -864,335 +1456,501 @@
       "streets": [
         {
           "name": "AMBAR",
-          "normalizedName": "AMBAR"
+          "normalizedName": "AMBAR",
+          "baseName": "AMBAR",
+          "normalizedBase": "AMBAR"
         },
         {
           "name": "ANCUE",
-          "normalizedName": "ANCUE"
+          "normalizedName": "ANCUE",
+          "baseName": "ANCUE",
+          "normalizedBase": "ANCUE"
         },
         {
           "name": "BAJADA DE PIEDRA",
-          "normalizedName": "BAJADA DE PIEDRA"
+          "normalizedName": "BAJADA DE PIEDRA",
+          "baseName": "BAJADA DE PIEDRA",
+          "normalizedBase": "BAJADA DE PIEDRA"
         },
         {
           "name": "BOTACURA",
-          "normalizedName": "BOTACURA"
+          "normalizedName": "BOTACURA",
+          "baseName": "BOTACURA",
+          "normalizedBase": "BOTACURA"
         },
         {
           "name": "CALLE CAUPOLICAN CALFUQUIR",
-          "normalizedName": "CALLE CAUPOLICAN CALFUQUIR"
+          "normalizedName": "CALLE CAUPOLICAN CALFUQUIR",
+          "baseName": "CALLE CAUPOLICAN CALFUQUIR",
+          "normalizedBase": "CALLE CAUPOLICAN CALFUQUIR"
         },
         {
           "name": "CALLE LOS TRAPENSES",
-          "normalizedName": "CALLE LOS TRAPENSES"
+          "normalizedName": "CALLE LOS TRAPENSES",
+          "baseName": "CALLE LOS TRAPENSES",
+          "normalizedBase": "CALLE LOS TRAPENSES"
         },
         {
           "name": "CALLEJON BELMAR",
-          "normalizedName": "CALLEJON BELMAR"
+          "normalizedName": "CALLEJON BELMAR",
+          "baseName": "CALLEJON BELMAR",
+          "normalizedBase": "CALLEJON BELMAR"
         },
         {
           "name": "CALLEJON MANUNZA",
-          "normalizedName": "CALLEJON MANUNZA"
+          "normalizedName": "CALLEJON MANUNZA",
+          "baseName": "CALLEJON MANUNZA",
+          "normalizedBase": "CALLEJON MANUNZA"
         },
         {
           "name": "CALLEJON RODRIGUEZ",
-          "normalizedName": "CALLEJON RODRIGUEZ"
+          "normalizedName": "CALLEJON RODRIGUEZ",
+          "baseName": "CALLEJON RODRIGUEZ",
+          "normalizedBase": "CALLEJON RODRIGUEZ"
         },
         {
           "name": "CALLEJON SALVO",
-          "normalizedName": "CALLEJON SALVO"
+          "normalizedName": "CALLEJON SALVO",
+          "baseName": "CALLEJON SALVO",
+          "normalizedBase": "CALLEJON SALVO"
         },
         {
           "name": "CAMINO TOLTEN",
-          "normalizedName": "CAMINO TOLTEN"
+          "normalizedName": "CAMINO TOLTEN",
+          "baseName": "CAMINO TOLTEN",
+          "normalizedBase": "CAMINO TOLTEN"
         },
         {
           "name": "CANTARRANA",
-          "normalizedName": "CANTARRANA"
+          "normalizedName": "CANTARRANA",
+          "baseName": "CANTARRANA",
+          "normalizedBase": "CANTARRANA"
         },
         {
           "name": "CHADA",
-          "normalizedName": "CHADA"
+          "normalizedName": "CHADA",
+          "baseName": "CHADA",
+          "normalizedBase": "CHADA"
         },
         {
           "name": "CHANCO",
-          "normalizedName": "CHANCO"
+          "normalizedName": "CHANCO",
+          "baseName": "CHANCO",
+          "normalizedBase": "CHANCO"
         },
         {
           "name": "COLONIA O'HIGGINS",
-          "normalizedName": "COLONIA O'HIGGINS"
+          "normalizedName": "COLONIA O'HIGGINS",
+          "baseName": "COLONIA O'HIGGINS",
+          "normalizedBase": "COLONIA O'HIGGINS"
         },
         {
           "name": "COMUY",
-          "normalizedName": "COMUY"
+          "normalizedName": "COMUY",
+          "baseName": "COMUY",
+          "normalizedBase": "COMUY"
         },
         {
           "name": "CUARZO",
-          "normalizedName": "CUARZO"
+          "normalizedName": "CUARZO",
+          "baseName": "CUARZO",
+          "normalizedBase": "CUARZO"
         },
         {
           "name": "DALPIN",
-          "normalizedName": "DALPIN"
+          "normalizedName": "DALPIN",
+          "baseName": "DALPIN",
+          "normalizedBase": "DALPIN"
         },
         {
           "name": "DONGUIL",
-          "normalizedName": "DONGUIL"
+          "normalizedName": "DONGUIL",
+          "baseName": "DONGUIL",
+          "normalizedBase": "DONGUIL"
         },
         {
           "name": "EL MAITEN",
-          "normalizedName": "EL MAITEN"
+          "normalizedName": "EL MAITEN",
+          "baseName": "EL MAITEN",
+          "normalizedBase": "EL MAITEN"
         },
         {
           "name": "ELENA HENRIQUEZ",
-          "normalizedName": "ELENA HENRIQUEZ"
+          "normalizedName": "ELENA HENRIQUEZ",
+          "baseName": "ELENA HENRIQUEZ",
+          "normalizedBase": "ELENA HENRIQUEZ"
         },
         {
           "name": "ENRIQUE TENORIO",
-          "normalizedName": "ENRIQUE TENORIO"
+          "normalizedName": "ENRIQUE TENORIO",
+          "baseName": "ENRIQUE TENORIO",
+          "normalizedBase": "ENRIQUE TENORIO"
         },
         {
           "name": "FAJA MAISAN",
-          "normalizedName": "FAJA MAISAN"
+          "normalizedName": "FAJA MAISAN",
+          "baseName": "FAJA MAISAN",
+          "normalizedBase": "FAJA MAISAN"
         },
         {
           "name": "FAJA STICKEL",
-          "normalizedName": "FAJA STICKEL"
+          "normalizedName": "FAJA STICKEL",
+          "baseName": "FAJA STICKEL",
+          "normalizedBase": "FAJA STICKEL"
         },
         {
           "name": "FAJA VALDIVIA",
-          "normalizedName": "FAJA VALDIVIA"
+          "normalizedName": "FAJA VALDIVIA",
+          "baseName": "FAJA VALDIVIA",
+          "normalizedBase": "FAJA VALDIVIA"
         },
         {
           "name": "FILOCO",
-          "normalizedName": "FILOCO"
+          "normalizedName": "FILOCO",
+          "baseName": "FILOCO",
+          "normalizedBase": "FILOCO"
         },
         {
           "name": "FUNDO CALIFORNIA",
-          "normalizedName": "FUNDO CALIFORNIA"
+          "normalizedName": "FUNDO CALIFORNIA",
+          "baseName": "FUNDO CALIFORNIA",
+          "normalizedBase": "FUNDO CALIFORNIA"
         },
         {
           "name": "GASTON LOBOS",
-          "normalizedName": "GASTON LOBOS"
+          "normalizedName": "GASTON LOBOS",
+          "baseName": "GASTON LOBOS",
+          "normalizedBase": "GASTON LOBOS"
         },
         {
           "name": "GERARDO DE LA JARA",
-          "normalizedName": "GERARDO DE LA JARA"
+          "normalizedName": "GERARDO DE LA JARA",
+          "baseName": "GERARDO DE LA JARA",
+          "normalizedBase": "GERARDO DE LA JARA"
         },
         {
           "name": "GUILLERMO HERNANDEZ",
-          "normalizedName": "GUILLERMO HERNANDEZ"
+          "normalizedName": "GUILLERMO HERNANDEZ",
+          "baseName": "GUILLERMO HERNANDEZ",
+          "normalizedBase": "GUILLERMO HERNANDEZ"
         },
         {
           "name": "HERNAN CATALAN",
-          "normalizedName": "HERNAN CATALAN"
+          "normalizedName": "HERNAN CATALAN",
+          "baseName": "HERNAN CATALAN",
+          "normalizedBase": "HERNAN CATALAN"
         },
         {
           "name": "HUALLIZADA",
-          "normalizedName": "HUALLIZADA"
+          "normalizedName": "HUALLIZADA",
+          "baseName": "HUALLIZADA",
+          "normalizedBase": "HUALLIZADA"
         },
         {
           "name": "HUEFEL",
-          "normalizedName": "HUEFEL"
+          "normalizedName": "HUEFEL",
+          "baseName": "HUEFEL",
+          "normalizedBase": "HUEFEL"
         },
         {
           "name": "ISMAEL BOCAZ",
-          "normalizedName": "ISMAEL BOCAZ"
+          "normalizedName": "ISMAEL BOCAZ",
+          "baseName": "ISMAEL BOCAZ",
+          "normalizedBase": "ISMAEL BOCAZ"
         },
         {
           "name": "LA CASCADA",
-          "normalizedName": "LA CASCADA"
+          "normalizedName": "LA CASCADA",
+          "baseName": "LA CASCADA",
+          "normalizedBase": "LA CASCADA"
         },
         {
           "name": "LA CONCEPCION",
-          "normalizedName": "LA CONCEPCION"
+          "normalizedName": "LA CONCEPCION",
+          "baseName": "LA CONCEPCION",
+          "normalizedBase": "LA CONCEPCION"
         },
         {
           "name": "LAS ARAUCARIAS",
-          "normalizedName": "LAS ARAUCARIAS"
+          "normalizedName": "LAS ARAUCARIAS",
+          "baseName": "LAS ARAUCARIAS",
+          "normalizedBase": "LAS ARAUCARIAS"
         },
         {
           "name": "LAS QUEMAS",
-          "normalizedName": "LAS QUEMAS"
+          "normalizedName": "LAS QUEMAS",
+          "baseName": "LAS QUEMAS",
+          "normalizedBase": "LAS QUEMAS"
         },
         {
           "name": "LOS ALERCES",
-          "normalizedName": "LOS ALERCES"
+          "normalizedName": "LOS ALERCES",
+          "baseName": "LOS ALERCES",
+          "normalizedBase": "LOS ALERCES"
         },
         {
           "name": "LOS CAPUCHINOS",
-          "normalizedName": "LOS CAPUCHINOS"
+          "normalizedName": "LOS CAPUCHINOS",
+          "baseName": "LOS CAPUCHINOS",
+          "normalizedBase": "LOS CAPUCHINOS"
         },
         {
           "name": "LOS DOMINICOS",
-          "normalizedName": "LOS DOMINICOS"
+          "normalizedName": "LOS DOMINICOS",
+          "baseName": "LOS DOMINICOS",
+          "normalizedBase": "LOS DOMINICOS"
         },
         {
           "name": "LOS FRANCISCANOS",
-          "normalizedName": "LOS FRANCISCANOS"
+          "normalizedName": "LOS FRANCISCANOS",
+          "baseName": "LOS FRANCISCANOS",
+          "normalizedBase": "LOS FRANCISCANOS"
         },
         {
           "name": "LOS GALPONES",
-          "normalizedName": "LOS GALPONES"
+          "normalizedName": "LOS GALPONES",
+          "baseName": "LOS GALPONES",
+          "normalizedBase": "LOS GALPONES"
         },
         {
           "name": "LOS HEROES",
-          "normalizedName": "LOS HEROES"
+          "normalizedName": "LOS HEROES",
+          "baseName": "LOS HEROES",
+          "normalizedBase": "LOS HEROES"
         },
         {
           "name": "MAHUIDANCHE",
-          "normalizedName": "MAHUIDANCHE"
+          "normalizedName": "MAHUIDANCHE",
+          "baseName": "MAHUIDANCHE",
+          "normalizedBase": "MAHUIDANCHE"
         },
         {
           "name": "MOLCO",
-          "normalizedName": "MOLCO"
+          "normalizedName": "MOLCO",
+          "baseName": "MOLCO",
+          "normalizedBase": "MOLCO"
         },
         {
           "name": "NUEVA ETRURIA",
-          "normalizedName": "NUEVA ETRURIA"
+          "normalizedName": "NUEVA ETRURIA",
+          "baseName": "NUEVA ETRURIA",
+          "normalizedBase": "NUEVA ETRURIA"
         },
         {
           "name": "OSVALDO BARRIGA",
-          "normalizedName": "OSVALDO BARRIGA"
+          "normalizedName": "OSVALDO BARRIGA",
+          "baseName": "OSVALDO BARRIGA",
+          "normalizedBase": "OSVALDO BARRIGA"
         },
         {
           "name": "OSVALDO BURGOS",
-          "normalizedName": "OSVALDO BURGOS"
+          "normalizedName": "OSVALDO BURGOS",
+          "baseName": "OSVALDO BURGOS",
+          "normalizedBase": "OSVALDO BURGOS"
         },
         {
           "name": "PARQUE NACIONAL ALERCE COSTERO",
-          "normalizedName": "PARQUE NACIONAL ALERCE COSTERO"
+          "normalizedName": "PARQUE NACIONAL ALERCE COSTERO",
+          "baseName": "PARQUE NACIONAL ALERCE COSTERO",
+          "normalizedBase": "PARQUE NACIONAL ALERCE COSTERO"
         },
         {
           "name": "PARQUE NACIONAL CONGUILLIO",
-          "normalizedName": "PARQUE NACIONAL CONGUILLIO"
+          "normalizedName": "PARQUE NACIONAL CONGUILLIO",
+          "baseName": "PARQUE NACIONAL CONGUILLIO",
+          "normalizedBase": "PARQUE NACIONAL CONGUILLIO"
         },
         {
           "name": "PARQUE NACIONAL HUERQUEHUE",
-          "normalizedName": "PARQUE NACIONAL HUERQUEHUE"
+          "normalizedName": "PARQUE NACIONAL HUERQUEHUE",
+          "baseName": "PARQUE NACIONAL HUERQUEHUE",
+          "normalizedBase": "PARQUE NACIONAL HUERQUEHUE"
         },
         {
           "name": "PARQUE NACIONAL LAGUNA SAN RAFAEL",
-          "normalizedName": "PARQUE NACIONAL LAGUNA SAN RAFAEL"
+          "normalizedName": "PARQUE NACIONAL LAGUNA SAN RAFAEL",
+          "baseName": "PARQUE NACIONAL LAGUNA SAN RAFAEL",
+          "normalizedBase": "PARQUE NACIONAL LAGUNA SAN RAFAEL"
         },
         {
           "name": "PARQUE NACIONAL NAHUELBUTA",
-          "normalizedName": "PARQUE NACIONAL NAHUELBUTA"
+          "normalizedName": "PARQUE NACIONAL NAHUELBUTA",
+          "baseName": "PARQUE NACIONAL NAHUELBUTA",
+          "normalizedBase": "PARQUE NACIONAL NAHUELBUTA"
         },
         {
           "name": "PARQUE NACIONAL PUYEHUE",
-          "normalizedName": "PARQUE NACIONAL PUYEHUE"
+          "normalizedName": "PARQUE NACIONAL PUYEHUE",
+          "baseName": "PARQUE NACIONAL PUYEHUE",
+          "normalizedBase": "PARQUE NACIONAL PUYEHUE"
         },
         {
           "name": "PARQUE NACIONAL VILLARRICA",
-          "normalizedName": "PARQUE NACIONAL VILLARRICA"
+          "normalizedName": "PARQUE NACIONAL VILLARRICA",
+          "baseName": "PARQUE NACIONAL VILLARRICA",
+          "normalizedBase": "PARQUE NACIONAL VILLARRICA"
         },
         {
           "name": "PASAJE AMANECER",
-          "normalizedName": "PASAJE AMANECER"
+          "normalizedName": "PASAJE AMANECER",
+          "baseName": "PASAJE AMANECER",
+          "normalizedBase": "PASAJE AMANECER"
         },
         {
           "name": "PASAJE DOMEYCO",
-          "normalizedName": "PASAJE DOMEYCO"
+          "normalizedName": "PASAJE DOMEYCO",
+          "baseName": "PASAJE DOMEYCO",
+          "normalizedBase": "PASAJE DOMEYCO"
         },
         {
           "name": "PASAJE EL ESFUERZO",
-          "normalizedName": "PASAJE EL ESFUERZO"
+          "normalizedName": "PASAJE EL ESFUERZO",
+          "baseName": "PASAJE EL ESFUERZO",
+          "normalizedBase": "PASAJE EL ESFUERZO"
         },
         {
           "name": "PASAJE EL PANAL",
-          "normalizedName": "PASAJE EL PANAL"
+          "normalizedName": "PASAJE EL PANAL",
+          "baseName": "PASAJE EL PANAL",
+          "normalizedBase": "PASAJE EL PANAL"
         },
         {
           "name": "PASAJE ESCULTOR FELIPE CORTEZ",
-          "normalizedName": "PASAJE ESCULTOR FELIPE CORTEZ"
+          "normalizedName": "PASAJE ESCULTOR FELIPE CORTEZ",
+          "baseName": "PASAJE ESCULTOR FELIPE CORTEZ",
+          "normalizedBase": "PASAJE ESCULTOR FELIPE CORTEZ"
         },
         {
           "name": "PASAJE LA REINA",
-          "normalizedName": "PASAJE LA REINA"
+          "normalizedName": "PASAJE LA REINA",
+          "baseName": "PASAJE LA REINA",
+          "normalizedBase": "PASAJE LA REINA"
         },
         {
           "name": "PASAJE LA UNION",
-          "normalizedName": "PASAJE LA UNION"
+          "normalizedName": "PASAJE LA UNION",
+          "baseName": "PASAJE LA UNION",
+          "normalizedBase": "PASAJE LA UNION"
         },
         {
           "name": "PASAJE LAS OBRERAS",
-          "normalizedName": "PASAJE LAS OBRERAS"
+          "normalizedName": "PASAJE LAS OBRERAS",
+          "baseName": "PASAJE LAS OBRERAS",
+          "normalizedBase": "PASAJE LAS OBRERAS"
         },
         {
           "name": "PASAJE LUIS PALMA CABRERA",
-          "normalizedName": "PASAJE LUIS PALMA CABRERA"
+          "normalizedName": "PASAJE LUIS PALMA CABRERA",
+          "baseName": "PASAJE LUIS PALMA CABRERA",
+          "normalizedBase": "PASAJE LUIS PALMA CABRERA"
         },
         {
           "name": "PASAJE MADRE JESUS",
-          "normalizedName": "PASAJE MADRE JESUS"
+          "normalizedName": "PASAJE MADRE JESUS",
+          "baseName": "PASAJE MADRE JESUS",
+          "normalizedBase": "PASAJE MADRE JESUS"
         },
         {
           "name": "PASAJE MAURICIO GUTIERREZ",
-          "normalizedName": "PASAJE MAURICIO GUTIERREZ"
+          "normalizedName": "PASAJE MAURICIO GUTIERREZ",
+          "baseName": "PASAJE MAURICIO GUTIERREZ",
+          "normalizedBase": "PASAJE MAURICIO GUTIERREZ"
         },
         {
           "name": "PEDRO CURIHUAL",
-          "normalizedName": "PEDRO CURIHUAL"
+          "normalizedName": "PEDRO CURIHUAL",
+          "baseName": "PEDRO CURIHUAL",
+          "normalizedBase": "PEDRO CURIHUAL"
         },
         {
           "name": "POCOYAN",
-          "normalizedName": "POCOYAN"
+          "normalizedName": "POCOYAN",
+          "baseName": "POCOYAN",
+          "normalizedBase": "POCOYAN"
         },
         {
           "name": "QUINQUE",
-          "normalizedName": "QUINQUE"
+          "normalizedName": "QUINQUE",
+          "baseName": "QUINQUE",
+          "normalizedBase": "QUINQUE"
         },
         {
           "name": "RESERVA RAIN",
-          "normalizedName": "RESERVA RAIN"
+          "normalizedName": "RESERVA RAIN",
+          "baseName": "RESERVA RAIN",
+          "normalizedBase": "RESERVA RAIN"
         },
         {
           "name": "ROBERTO CHAER",
-          "normalizedName": "ROBERTO CHAER"
+          "normalizedName": "ROBERTO CHAER",
+          "baseName": "ROBERTO CHAER",
+          "normalizedBase": "ROBERTO CHAER"
         },
         {
           "name": "SALTO DONGUIL",
-          "normalizedName": "SALTO DONGUIL"
+          "normalizedName": "SALTO DONGUIL",
+          "baseName": "SALTO DONGUIL",
+          "normalizedBase": "SALTO DONGUIL"
         },
         {
           "name": "SALTO EL LAJA",
-          "normalizedName": "SALTO EL LAJA"
+          "normalizedName": "SALTO EL LAJA",
+          "baseName": "SALTO EL LAJA",
+          "normalizedBase": "SALTO EL LAJA"
         },
         {
           "name": "SALTO HUILO HUILO",
-          "normalizedName": "SALTO HUILO HUILO"
+          "normalizedName": "SALTO HUILO HUILO",
+          "baseName": "SALTO HUILO HUILO",
+          "normalizedBase": "SALTO HUILO HUILO"
         },
         {
           "name": "SALTO OJOS DEL CABURGUA",
-          "normalizedName": "SALTO OJOS DEL CABURGUA"
+          "normalizedName": "SALTO OJOS DEL CABURGUA",
+          "baseName": "SALTO OJOS DEL CABURGUA",
+          "normalizedBase": "SALTO OJOS DEL CABURGUA"
         },
         {
           "name": "SALTO PETROHUE",
-          "normalizedName": "SALTO PETROHUE"
+          "normalizedName": "SALTO PETROHUE",
+          "baseName": "SALTO PETROHUE",
+          "normalizedBase": "SALTO PETROHUE"
         },
         {
           "name": "SALTO TRUFUL TRUFUL",
-          "normalizedName": "SALTO TRUFUL TRUFUL"
+          "normalizedName": "SALTO TRUFUL TRUFUL",
+          "baseName": "SALTO TRUFUL TRUFUL",
+          "normalizedBase": "SALTO TRUFUL TRUFUL"
         },
         {
           "name": "SANTA AMELIA",
-          "normalizedName": "SANTA AMELIA"
+          "normalizedName": "SANTA AMELIA",
+          "baseName": "SANTA AMELIA",
+          "normalizedBase": "SANTA AMELIA"
         },
         {
           "name": "SELVA SAAVEDRA",
-          "normalizedName": "SELVA SAAVEDRA"
+          "normalizedName": "SELVA SAAVEDRA",
+          "baseName": "SELVA SAAVEDRA",
+          "normalizedBase": "SELVA SAAVEDRA"
         },
         {
           "name": "TRAPEHUE",
-          "normalizedName": "TRAPEHUE"
+          "normalizedName": "TRAPEHUE",
+          "baseName": "TRAPEHUE",
+          "normalizedBase": "TRAPEHUE"
         },
         {
           "name": "WALTER STEPKE",
-          "normalizedName": "WALTER STEPKE"
+          "normalizedName": "WALTER STEPKE",
+          "baseName": "WALTER STEPKE",
+          "normalizedBase": "WALTER STEPKE"
         },
         {
           "name": "ESPERANZA",
-          "normalizedName": "ESPERANZA"
+          "normalizedName": "ESPERANZA",
+          "baseName": "ESPERANZA",
+          "normalizedBase": "ESPERANZA"
         }
       ]
     }
