@@ -22,6 +22,7 @@ const input = document.querySelector('#street-input');
 const clearButton = document.querySelector('#clear-button');
 const list = document.querySelector('#suggestions');
 const answer = document.querySelector('#answer');
+const installButton = document.querySelector('#install-button');
 
 const RESTING_HINT = 'La búsqueda no distingue mayúsculas ni tildes.';
 
@@ -288,4 +289,43 @@ if (database) {
       loadError = true;
       showAnswer();
     });
+}
+
+/* ── Install ───────────────────────────────────────────────────────────────
+   The button appears only when the browser says the app can be installed, so
+   it never promises something the device will not do. iOS has no such event:
+   there, installing is Compartir → Añadir a pantalla de inicio.             */
+
+let installPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  installPrompt = event;
+  if (installButton) installButton.hidden = false;
+});
+
+if (installButton) {
+  installButton.addEventListener('click', async () => {
+    if (!installPrompt) return;
+    installButton.hidden = true;
+    const prompt = installPrompt;
+    installPrompt = null;
+    await prompt.prompt();
+  });
+}
+
+window.addEventListener('appinstalled', () => {
+  installPrompt = null;
+  if (installButton) installButton.hidden = true;
+});
+
+// The service worker is what makes the installed app open with no signal.
+// A build that ships its own listing (the standalone preview) has nothing to
+// cache and no worker to serve it, so it skips this.
+if ('serviceWorker' in navigator && !window.SECTOR_DATABASE) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {
+      // No offline copy this time; the app still works online.
+    });
+  });
 }

@@ -21,6 +21,8 @@ test('serves the application and rejects everything else', async (t) => {
     assert.match(body, /CESFAM Pitrufquén/, 'the clinic must be named on the page');
     assert.match(body, /src="escudo-pitrufquen\.png"/, 'the municipal crest must be on the page');
     assert.match(body, /alt="Escudo de la Municipalidad de Pitrufquén"/);
+    assert.match(body, /<link rel="manifest" href="manifest\.webmanifest">/);
+    assert.match(body, /<link rel="apple-touch-icon"/);
     assert.match(body, /Mg\. Simón Valdivia/);
     assert.match(body, /wa\.me\/message\/BTVOFGDVGI5UG1/);
     assert.match(body, /linkedin\.com\/in\/s-valdivia-v/);
@@ -33,6 +35,12 @@ test('serves the application and rejects everything else', async (t) => {
       ['/sector-lookup.js', 'text/javascript; charset=utf-8'],
       ['/styles.css', 'text/css; charset=utf-8'],
       ['/escudo-pitrufquen.png', 'image/png'],
+      ['/fonts.css', 'text/css; charset=utf-8'],
+      ['/fonts/archivo-subset.woff2', 'font/woff2'],
+      ['/sw.js', 'text/javascript; charset=utf-8'],
+      ['/manifest.webmanifest', 'application/manifest+json; charset=utf-8'],
+      ['/icons/icon-192.png', 'image/png'],
+      ['/icons/apple-touch-icon.png', 'image/png'],
       ['/data/sectores.json', 'application/json; charset=utf-8'],
     ]) {
       const response = await fetch(base + path);
@@ -71,6 +79,9 @@ test('serves the application and rejects everything else', async (t) => {
       '/data/../server.js',
       '/%2e%2e/package.json',
       '/scripts/convert-sectores.py',
+      '/fonts/../../server.js',
+      '/fonts%2f..%2f..%2fserver.js',
+      '/.gitignore',
       '/missing',
     ]) {
       assert.equal((await fetch(base + path)).status, 404, path);

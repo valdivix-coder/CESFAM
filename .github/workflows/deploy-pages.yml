@@ -3,6 +3,9 @@ name: Deploy CESFAM lookup to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_run:
+    workflows: ['Regenerar la base desde la planilla']
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +19,9 @@ concurrency:
 
 jobs:
   deploy:
+    # A workflow_run fires whatever the converter's outcome; only a successful
+    # regeneration is worth publishing.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -26,10 +32,7 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Prepare static site
-        run: |
-          mkdir site
-          cp public/index.html public/app.js public/sector-lookup.js public/styles.css public/escudo-pitrufquen.png site/
-          cp -R data site/data
+        run: npm run build
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

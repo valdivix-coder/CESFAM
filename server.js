@@ -2,28 +2,37 @@
 
 const http = require('node:http');
 const { readFile } = require('node:fs/promises');
-const { extname, join } = require('node:path');
+const { extname, join, resolve, sep } = require('node:path');
 
 const port = Number(process.env.PORT || 3000);
-const publicDir = join(__dirname, 'public');
+const publicDir = resolve(__dirname, 'public');
+const dataDir = resolve(__dirname, 'data');
+
 const contentTypes = {
   '.css': 'text/css; charset=utf-8',
-  '.png': 'image/png',
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
+  '.png': 'image/png',
+  '.svg': 'image/svg+xml',
+  '.webmanifest': 'application/manifest+json; charset=utf-8',
+  '.woff2': 'font/woff2',
 };
 
-// An explicit allow list: nothing outside these files is reachable, so a
-// crafted path can never escape the project directory.
-const files = {
-  '/index.html': join(publicDir, 'index.html'),
-  '/app.js': join(publicDir, 'app.js'),
-  '/sector-lookup.js': join(publicDir, 'sector-lookup.js'),
-  '/styles.css': join(publicDir, 'styles.css'),
-  '/escudo-pitrufquen.png': join(publicDir, 'escudo-pitrufquen.png'),
-  '/data/sectores.json': join(__dirname, 'data', 'sectores.json'),
-};
+/**
+ * Maps a request path to a file under one of the two served roots, or null.
+ * The resolved path must stay inside its root, so no crafted path — encoded or
+ * not — can reach a file the site does not publish.
+ */
+function locate(pathName) {
+  const [root, relative] = pathName.startsWith('/data/')
+    ? [dataDir, pathName.slice('/data/'.length)]
+    : [publicDir, pathName.slice(1)];
+  if (!relative || relative.split('/').some((part) => part.startsWith('.'))) return null;
+
+  const filePath = resolve(root, relative);
+  return filePath.startsWith(root + sep) ? filePath : null;
+}
 
 const server = http.createServer(async (request, response) => {
   if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -33,12 +42,13 @@ const server = http.createServer(async (request, response) => {
 
   let pathName;
   try {
-    pathName = new URL(request.url, 'http://localhost').pathname;
+    pathName = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
   } catch {
     response.writeHead(400).end('Bad request');
     return;
   }
-  const filePath = files[pathName === '/' ? '/index.html' : pathName];
+
+  const filePath = locate(pathName === '/' ? '/index.html' : pathName);
   if (!filePath) {
     response.writeHead(404).end('Not found');
     return;
@@ -48,8 +58,8 @@ const server = http.createServer(async (request, response) => {
     const body = await readFile(filePath);
     response.writeHead(200, {
       'Content-Type': contentTypes[extname(filePath)] || 'application/octet-stream',
-      // The database is regenerated from the spreadsheet, so never let a stale
-      // copy outlive a rebuild during local use.
+      // Everything is regenerated from the spreadsheet, and the service worker
+      // does the real caching, so never let a stale copy outlive a rebuild.
       'Cache-Control': 'no-cache',
     });
     response.end(request.method === 'HEAD' ? undefined : body);

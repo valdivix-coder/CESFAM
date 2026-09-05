@@ -1,67 +1,102 @@
-# Consulta de sectores CESFAM
+# Consulta tu sector · CESFAM Pitrufquén
 
-Aplicación web para consultar a qué sector CESFAM pertenece una calle.
+Aplicación web para consultar a qué sector del CESFAM Pitrufquén pertenece una
+calle. Se instala en el teléfono y funciona sin señal.
 
-## Ver la aplicación
+## Actualizar la base de calles
 
-1. Instala [Node.js](https://nodejs.org/) 20.12 o superior.
-2. En una terminal, desde la carpeta del proyecto, ejecuta:
+Este es el único procedimiento que necesita saber quien mantiene la aplicación.
+**No hace falta instalar nada ni usar la terminal.**
 
-   ```bash
-   npm start
-   ```
+1. Entra a [el repositorio en GitHub](https://github.com/valdivix-coder/CESFAM).
+2. Arrastra el Excel nuevo sobre el archivo `Sectores Cesfam nuevo.xlsx` y
+   confirma el cambio.
+3. Espera unos minutos. La aplicación queda actualizada sola.
 
-3. Abre **http://localhost:3000** en tu navegador.
-4. Escribe una calle y selecciona **Buscar**. La búsqueda no distingue entre mayúsculas/minúsculas ni tildes.
+Por dentro: el flujo **Regenerar la base desde la planilla** reconstruye
+`data/sectores.json`, corre las pruebas y publica. Si la planilla tiene un
+problema —una calle en dos sectores sin tramo de numeración, por ejemplo— queda
+anotado en el registro del flujo, en la pestaña **Actions**.
 
-Puedes probar con estas tres calles:
+El Excel manda: `data/sectores.json` se genera a partir de él y no debe editarse
+a mano.
 
-| Calle | Resultado esperado |
+## Dónde está publicada
+
+| | |
 | --- | --- |
-| `Los Coigües` | Sector Amarillo |
-| `Millahuin` | Sector Azul |
-| `Ámbar` | Sector Verde |
+| Principal | Vercel |
+| Respaldo | `https://valdivix-coder.github.io/CESFAM/` |
 
-### Calles divididas por numeración
+Las dos se actualizan solas con cada cambio en `main`. La aplicación usa rutas
+relativas en todas partes, así que funciona igual en la raíz de un dominio que
+en un subdirectorio.
 
-La planilla parte 17 calles del centro entre dos sectores según el número de la
-casa (`ANDRÉS BELLO, MENOR DE 800` en Amarillo y `ANDRÉS BELLO, MAYOR DE 800` en
-Azul). Basta con escribir el nombre de la calle:
+### Conectar Vercel la primera vez
 
-- Sin número, la consulta muestra **los dos tramos** para que elijas.
-- Con el número en el campo `Nº` —o escrito al final, como `Andrés Bello 950`—
-  la consulta responde con **un solo sector**.
+En [vercel.com](https://vercel.com) → **Add New… → Project** → importar este
+repositorio. La configuración ya viene en `vercel.json`; solo hay que confirmar:
 
-El número que marca la división (800) es ambiguo en la planilla original, así que
-la aplicación muestra los dos sectores y avisa que hay que confirmarlo con el
-CESFAM, en lugar de elegir uno por su cuenta. Lo mismo ocurre con `Barros Arana`,
-que la planilla lista en dos sectores sin indicar tramos.
+- **Framework preset:** Other
+- **Build command:** `npm run build`
+- **Output directory:** `site`
 
-Si una calle no aparece, la aplicación propone los nombres parecidos que sí están
-en la base.
+Cada rama recibe además una URL de previsualización, útil para revisar un cambio
+antes de que sea público.
 
-## Ejecutar las pruebas automáticas
+> El plan gratuito de Vercel es para uso personal no comercial. Conviene
+> confirmar con ellos si corresponde antes de anunciar la aplicación como
+> servicio municipal; si no, están el plan Pro o el respaldo en GitHub Pages,
+> que no tiene esa restricción.
+
+## Instalarla en el teléfono
+
+- **Android:** aparece el botón «Instalar en tu teléfono» al pie de la página.
+- **iPhone:** Safari no ofrece ese botón. Hay que usar **Compartir → Añadir a
+  pantalla de inicio**.
+
+Tras la primera visita queda guardada entera (235 KB) y **abre sin conexión**.
+Cuando se publica una versión nueva, el teléfono la recoge en la visita
+siguiente.
+
+## Trabajar en el código
 
 ```bash
-npm test
+npm start     # servidor local en http://localhost:3000
+npm test      # 64 pruebas: búsqueda, conversor, servidor, interfaz y build
+npm run build # genera site/, que es lo que se publica
 ```
 
-Cubren la búsqueda, el conversor de la planilla, el servidor local y la interfaz.
-
-## Regenerar la base desde la planilla Excel
-
-La base usada por la interfaz es `data/sectores.json`. Para reconstruirla desde
-`Sectores Cesfam nuevo.xlsx`, ejecuta:
+Requiere Node.js 20.12 o superior. Para regenerar la base a mano hace falta
+además Python 3 (solo biblioteca estándar):
 
 ```bash
 npm run convert:sectors
 ```
 
-El conversor utiliza únicamente Python 3 y las bibliotecas estándar. Lee los
-sectores desde la fila 2 de la planilla, así que agregar una columna nueva no
-exige tocar el código. Al terminar avisa por consola de las calles que quedan
-listadas en más de un sector sin tramo de numeración; con `--strict` esos avisos
-hacen fallar la conversión.
+### Cómo está armado
+
+| Archivo | Qué hace |
+| --- | --- |
+| `public/sector-lookup.js` | La búsqueda. Lo usan la página y las pruebas, sin duplicar lógica. |
+| `public/app.js` | La interfaz: sugerencias, respuesta, instalación. |
+| `public/sw.js` | Guarda la aplicación para que funcione sin señal. |
+| `scripts/convert-sectores.py` | Excel → `data/sectores.json`. |
+| `scripts/build-site.js` | Arma `site/` y sella la versión de la caché. |
+
+Las tipografías están alojadas en el repositorio (`public/fonts/`): la página no
+pide nada a terceros, así que conserva su aspecto sin conexión.
+
+### Calles divididas por numeración
+
+La planilla parte 17 calles del centro entre dos sectores según el número de la
+casa (`ANDRÉS BELLO, MENOR DE 800` en Amarillo, `MAYOR DE 800` en Azul). Basta
+escribir el nombre: si la calle se divide, la aplicación pide el número. Sin
+número muestra los dos tramos.
+
+El número exacto de la división (800) es ambiguo en la planilla original, así
+que la aplicación muestra los dos sectores y avisa, en lugar de elegir uno por
+su cuenta. Lo mismo con `Barros Arana`, que aparece en dos sectores sin tramos.
 
 ### Formato de `data/sectores.json`
 
@@ -83,17 +118,10 @@ hacen fallar la conversión.
 }
 ```
 
-`range` solo aparece en las calles divididas por numeración: `lt` cubre los
-números menores al pivote y `gte` el resto.
+`range` solo aparece en las calles divididas: `lt` cubre los números menores al
+pivote y `gte` el resto.
 
-## Publicar en GitHub Pages
+---
 
-El repositorio incluye un flujo de despliegue automático. Para publicarlo:
-
-1. Sube estos cambios a la rama `main` de GitHub.
-2. En GitHub, abre **Settings → Pages**.
-3. En **Build and deployment**, selecciona **GitHub Actions** como fuente.
-4. Abre la pestaña **Actions** y espera que termine el flujo **Deploy CESFAM lookup to GitHub Pages**.
-5. GitHub mostrará la URL pública. En este repositorio normalmente será `https://valdivix-coder.github.io/CESFAM/`.
-
-Desde ese momento, cada cambio enviado a `main` actualiza la aplicación automáticamente. El flujo prepara una versión estática de la interfaz y de `data/sectores.json`; no hace falta ejecutar el servidor Node en GitHub Pages.
+Desarrollado por Mg. Simón Valdivia · Psicólogo especializado en Desarrollo
+Creativo e Inteligencia Artificial.
