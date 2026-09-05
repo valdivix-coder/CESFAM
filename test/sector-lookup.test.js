@@ -21,3 +21,21 @@ test('finds a street in the green sector', () => {
     sectorId: 'verde', sectorName: 'Sector Verde', street: 'AMBAR',
   }]);
 });
+
+const { execFileSync } = require('node:child_process');
+const { mkdtempSync, readFileSync, rmSync } = require('node:fs');
+const { tmpdir } = require('node:os');
+const { join } = require('node:path');
+
+test('converts the spreadsheet into a complete lookup database', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'cesfam-sectores-'));
+  const output = join(directory, 'sectores.json');
+  try {
+    execFileSync('python3', ['scripts/convert-sectores.py', 'Sectores Cesfam nuevo.xlsx', output]);
+    const database = JSON.parse(readFileSync(output, 'utf8'));
+    assert.deepEqual(database.sectors.map((sector) => sector.streets.length), [99, 112, 83]);
+    assert.equal(database.sectors[0].streets[0].normalizedName, 'LOS COIGUES');
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
+});
