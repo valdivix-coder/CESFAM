@@ -1,0 +1,12 @@
+{
+  "name": "cesfam-sector-lookup",
+  "private": true,
+  "version": "1.0.0",
+  "description": "CESFAM sector street lookup database",
+  "scripts": {
+    "convert:sectors": "python3 scripts/convert-sectores.py 'Sectores Cesfam nuevo.xlsx' data/sectores.json",
+    "test": "node --test",
+    "start": "node server.js",
+    "build:pages": "rm -rf site && mkdir site && cp public/index.html public/app.js public/styles.css site/ && cp -R data site/data"
+  }
+}
