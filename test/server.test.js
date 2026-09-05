@@ -19,6 +19,8 @@ test('serves the application and rejects everything else', async (t) => {
     assert.match(body, /<script src="app.js"><\/script>/);
     assert.match(body, /<title>Consulta tu sector · CESFAM Pitrufquén<\/title>/);
     assert.match(body, /CESFAM Pitrufquén/, 'the clinic must be named on the page');
+    assert.match(body, /src="escudo-pitrufquen\.png"/, 'the municipal crest must be on the page');
+    assert.match(body, /alt="Escudo de la Municipalidad de Pitrufquén"/);
     assert.match(body, /Mg\. Simón Valdivia/);
     assert.match(body, /wa\.me\/message\/BTVOFGDVGI5UG1/);
     assert.match(body, /linkedin\.com\/in\/s-valdivia-v/);
@@ -30,6 +32,7 @@ test('serves the application and rejects everything else', async (t) => {
       ['/app.js', 'text/javascript; charset=utf-8'],
       ['/sector-lookup.js', 'text/javascript; charset=utf-8'],
       ['/styles.css', 'text/css; charset=utf-8'],
+      ['/escudo-pitrufquen.png', 'image/png'],
       ['/data/sectores.json', 'application/json; charset=utf-8'],
     ]) {
       const response = await fetch(base + path);

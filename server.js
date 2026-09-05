@@ -8,6 +8,7 @@ const port = Number(process.env.PORT || 3000);
 const publicDir = join(__dirname, 'public');
 const contentTypes = {
   '.css': 'text/css; charset=utf-8',
+  '.png': 'image/png',
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
@@ -20,6 +21,7 @@ const files = {
   '/app.js': join(publicDir, 'app.js'),
   '/sector-lookup.js': join(publicDir, 'sector-lookup.js'),
   '/styles.css': join(publicDir, 'styles.css'),
+  '/escudo-pitrufquen.png': join(publicDir, 'escudo-pitrufquen.png'),
   '/data/sectores.json': join(__dirname, 'data', 'sectores.json'),
 };
 
