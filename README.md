@@ -25,7 +25,7 @@ a mano.
 
 | | |
 | --- | --- |
-| Principal | Vercel |
+| Principal | `https://cesfam-lyart.vercel.app/` |
 | Respaldo | `https://valdivix-coder.github.io/CESFAM/` |
 
 Las dos se actualizan solas con cada cambio en `main`. La aplicación usa rutas
@@ -64,9 +64,10 @@ variables que Vercel expone.
 
 ## Instalarla en el teléfono
 
-- **Android:** aparece el botón «Instalar en tu teléfono» al pie de la página.
-- **iPhone:** Safari no ofrece ese botón. Hay que usar **Compartir → Añadir a
-  pantalla de inicio**.
+El botón **Instalar** abre el instalador del navegador donde existe (Chrome y
+Edge, en Android y en escritorio). **Safari no expone ninguno**: en iPhone no
+hay forma de lanzarlo desde la página, así que el botón muestra la ruta —
+Compartir → Añadir a pantalla de inicio. Cada navegador ve solo su ruta.
 
 Tras la primera visita queda guardada entera (265 KB) y **abre sin conexión**.
 Cuando se publica una versión nueva, el teléfono la recoge en la visita
@@ -76,7 +77,7 @@ siguiente.
 
 ```bash
 npm start     # servidor local en http://localhost:3000
-npm test      # 79 pruebas: búsqueda, conversor, servidor, interfaz y build
+npm test      # 88 pruebas: búsqueda, conversor, servidor, interfaz y build
 npm run build # genera site/, que es lo que se publica
 ```
 

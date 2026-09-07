@@ -44,8 +44,20 @@ class Element {
   set textContent(value) { this.children = [new Text(value)]; }
   get textContent() { return this.text; }
 
-  append(...nodes) { this.children.push(...flatten(nodes)); }
-  replaceChildren(...nodes) { this.children = flatten(nodes); }
+  append(...nodes) { this.adopt(flatten(nodes)); }
+  replaceChildren(...nodes) { this.children = []; this.adopt(flatten(nodes)); }
+
+  adopt(nodes) {
+    for (const node of nodes) {
+      if (node instanceof Element) node.parent = this;
+      this.children.push(node);
+    }
+  }
+
+  remove() {
+    if (this.parent) this.parent.children = this.parent.children.filter((node) => node !== this);
+    this.parent = null;
+  }
   setAttribute(name, value) { this.attributes.set(name, String(value)); }
   getAttribute(name) { return this.attributes.has(name) ? this.attributes.get(name) : null; }
   removeAttribute(name) { this.attributes.delete(name); }
@@ -71,9 +83,19 @@ class Element {
     return found;
   }
 
+  /** Descendants matching a tag name or a single class. */
   querySelectorAll(selector) {
-    assert.ok(selector.startsWith('.'), `unsupported selector ${selector}`);
-    return this.byClass(selector.slice(1));
+    if (selector.startsWith('.')) return this.byClass(selector.slice(1));
+    const found = [];
+    const walk = (node) => {
+      for (const child of node.children) {
+        if (!(child instanceof Element)) continue;
+        if (child.tagName === selector) found.push(child);
+        walk(child);
+      }
+    };
+    walk(this);
+    return found;
   }
 
   get text() { return this.children.map((child) => child.text).join(''); }
@@ -99,6 +121,12 @@ function createPage() {
   elements['#suggestions'].hidden = true;
   elements['#clear-button'].hidden = true;
   elements['#install-help'].hidden = true;
+  for (const name of ['android', 'ios', 'desktop']) {
+    const step = new Element('p');
+    step.dataset.platform = name;
+    step.textContent = `ruta ${name}`;
+    elements['#install-help'].append(step);
+  }
   elements['#share-button'].dataset.message = 'Te comparto *Sectores*';
   elements['#share-button'].href = 'https://wa.me/?text=fallback';
 
@@ -117,7 +145,8 @@ function createPage() {
 const database = JSON.parse(readFileSync('data/sectores.json', 'utf8'));
 
 /** Loads sector-lookup.js and app.js in one sandbox, with a stubbed fetch. */
-function loadApp({ fetchImpl, seeded, serviceWorker, standalone, location } = {}) {
+function loadApp({ fetchImpl, seeded, serviceWorker, standalone, location,
+                  userAgent, framed, popups } = {}) {
   const page = createPage();
   const registrations = [];
   const listeners = new Map();
@@ -127,10 +156,16 @@ function loadApp({ fetchImpl, seeded, serviceWorker, standalone, location } = {}
     URL,
     setTimeout,
     fetch: fetchImpl || (async () => ({ ok: true, status: 200, json: async () => database })),
-    navigator: serviceWorker === false ? {} : {
-      serviceWorker: { register: async (path) => { registrations.push(path); } },
+    navigator: {
+      userAgent: userAgent || 'Mozilla/5.0 (X11; Linux x86_64)',
+      platform: 'Linux x86_64',
+      maxTouchPoints: 0,
+      ...(serviceWorker === false ? {} : {
+        serviceWorker: { register: async (path) => { registrations.push(path); } },
+      }),
     },
     matchMedia: () => ({ matches: Boolean(standalone) }),
+    open: () => (popups === false ? null : {}),
     location: location || {
       protocol: 'https:', origin: 'https://sectores.example', pathname: '/',
     },
@@ -140,6 +175,9 @@ function loadApp({ fetchImpl, seeded, serviceWorker, standalone, location } = {}
   };
   sandbox.window = sandbox;
   sandbox.self = sandbox;
+  sandbox.top = framed ? { name: 'otra ventana' } : sandbox;
+  sandbox.opened = [];
+  if (framed) sandbox.open = (url) => { sandbox.opened.push(url); return popups === false ? null : {}; };
   sandbox.registrations = registrations;
   sandbox.fire = (name, event = {}) => {
     for (const handler of listeners.get(name) || []) handler({ preventDefault() {}, ...event });
@@ -398,29 +436,60 @@ test('the install button is always offered, and prompts when the browser can', a
   page.sandbox.fire('beforeinstallprompt', {
     preventDefault: () => { defaultPrevented = true; },
     prompt: async () => { prompted = true; },
+    userChoice: Promise.resolve({ outcome: 'accepted' }),
   });
   assert.ok(defaultPrevented, 'el aviso propio del navegador se pospone en favor del botón');
 
   button.dispatch('click');
   await page.settle();
-  assert.ok(prompted);
-  assert.equal(button.hidden, true, 'no queda un botón que ya no hace nada');
+  assert.ok(prompted, 'el botón abre el instalador del navegador');
+  assert.equal(page.elements['#install-card'].hidden, true, 'ya está instalada');
 });
 
-test('without a prompt the button shows the steps instead of pretending', async () => {
+test('cancelling the installer leaves the card in place', async () => {
   const page = await ready();
+  page.sandbox.fire('beforeinstallprompt', {
+    prompt: async () => {},
+    userChoice: Promise.resolve({ outcome: 'dismissed' }),
+  });
+  page.elements['#install-button'].dispatch('click');
+  await page.settle();
+  assert.equal(page.elements['#install-card'].hidden, false,
+    'rechazar el diálogo no es haber instalado');
+});
+
+test('without an installer the button shows this browser\'s route only', async () => {
+  const page = loadApp({ userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)' });
+  await page.settle();
   const button = page.elements['#install-button'];
   const help = page.elements['#install-help'];
   assert.equal(help.hidden, true);
 
   button.dispatch('click');
-  assert.equal(help.hidden, false, 'Safari nunca ofrece el diálogo: hay que explicarlo');
+  assert.equal(help.hidden, false, 'Safari no ofrece instalador: hay que explicarlo');
+  assert.deepEqual(help.querySelectorAll('p').map((step) => step.dataset.platform), ['ios'],
+    'sobra todo lo que no es la ruta de este navegador');
   assert.equal(button.getAttribute('aria-expanded'), 'true');
   assert.equal(button.hidden, false, 'el botón sigue ahí para poder cerrar la ayuda');
 
   button.dispatch('click');
   assert.equal(help.hidden, true);
   assert.equal(button.getAttribute('aria-expanded'), 'false');
+});
+
+test('each browser gets the route it actually has', async () => {
+  for (const [agent, expected] of [
+    ['Mozilla/5.0 (Linux; Android 14) Chrome/120', 'android'],
+    ['Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X)', 'ios'],
+    ['Mozilla/5.0 (Windows NT 10.0) Chrome/120', 'desktop'],
+  ]) {
+    const page = loadApp({ userAgent: agent });
+    await page.settle();
+    page.elements['#install-button'].dispatch('click');
+    assert.deepEqual(
+      page.elements['#install-help'].querySelectorAll('p').map((s) => s.dataset.platform),
+      [expected], agent);
+  }
 });
 
 test('the whole card is gone once the app runs installed', async () => {
@@ -495,4 +564,46 @@ test('opened from a file, the link keeps the address written into the page', asy
   await page.settle();
   assert.equal(page.elements['#share-button'].href, 'https://wa.me/?text=fallback',
     'sin un origen real no se puede inventar una dirección');
+});
+
+test('inside a frame the share button opens WhatsApp itself', async () => {
+  // A sandboxed frame drops target="_blank", so the anchor alone does nothing —
+  // which is exactly what the published preview does.
+  const page = loadApp({ framed: true });
+  await page.settle();
+  const link = page.elements['#share-button'];
+  let defaultPrevented = false;
+  link.dispatch('click', { preventDefault: () => { defaultPrevented = true; } });
+
+  assert.ok(defaultPrevented, 'la navegación por defecto no llegaría a ninguna parte');
+  assert.deepEqual(page.sandbox.opened, [link.href], 'se abre en una ventana nueva');
+  assert.match(link.href, /^https:\/\/wa\.me\/\?text=/);
+});
+
+test('a frame that cannot open a window navigates to WhatsApp instead', async () => {
+  const page = loadApp({ framed: true, popups: false });
+  await page.settle();
+  const link = page.elements['#share-button'];
+  link.dispatch('click');
+  assert.equal(page.sandbox.location.href, link.href,
+    'sin ventana nueva, al menos hay que llegar a WhatsApp');
+});
+
+test('outside a frame the anchor is left to do its own work', async () => {
+  const page = await ready();
+  assert.equal(page.elements['#share-button'].listeners.has('click'), false,
+    'un enlace normal no necesita que nadie intercepte su clic');
+});
+
+test('a preview that ships its own listing shares the published address', async () => {
+  // The preview is a copy of the app, not the app: sharing its own frame URL
+  // would send people to the preview instead of to the service.
+  const page = loadApp({
+    seeded: true,
+    fetchImpl: () => { throw new Error('no debe pedir nada'); },
+    location: { protocol: 'https:', origin: 'https://claude.ai', pathname: '/code/artifact/x' },
+  });
+  await page.settle();
+  assert.equal(page.elements['#share-button'].href, 'https://wa.me/?text=fallback',
+    'conserva la dirección publicada escrita en la página');
 });
