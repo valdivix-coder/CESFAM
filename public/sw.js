@@ -64,6 +64,29 @@ self.addEventListener('message', (event) => {
   if (event.data === 'skip-waiting') self.skipWaiting();
 });
 
+/**
+ * The cached page, ready to answer a navigation.
+ *
+ * A host that redirects (Vercel's cleanUrls turns /index.html into a 308 to /)
+ * leaves a redirected response in the cache, and the browser refuses to build a
+ * navigation response from one — offline would fail outright. Copying it into a
+ * fresh response drops that flag.
+ */
+async function shellResponse() {
+  const cache = await caches.open(CACHE);
+  for (const key of [new URL('./', self.registration.scope), 'index.html']) {
+    const cached = await cache.match(key);
+    if (!cached) continue;
+    if (!cached.redirected) return cached;
+    return new Response(await cached.blob(), {
+      status: 200,
+      statusText: 'OK',
+      headers: cached.headers,
+    });
+  }
+  return Response.error();
+}
+
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
@@ -78,10 +101,7 @@ self.addEventListener('fetch', (event) => {
       try {
         return await fetch(request);
       } catch {
-        const cache = await caches.open(CACHE);
-        return (await cache.match('index.html'))
-          || (await cache.match(new URL('./', self.registration.scope)))
-          || Response.error();
+        return shellResponse();
       }
     })());
     return;

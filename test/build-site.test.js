@@ -99,3 +99,26 @@ test('the page loads no third-party resources', (t) => {
   assert.doesNotMatch(html, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
   assert.doesNotMatch(css, /https?:\/\//);
 });
+
+test('nothing reintroduces a redirect on the page itself', () => {
+  // Vercel's cleanUrls turns /index.html into a 308. The precached entry then
+  // carries redirected=true, and the browser refuses to answer a navigation
+  // with it — the installed app fails to open offline. Verified in Chromium.
+  const vercel = JSON.parse(readFileSync('vercel.json', 'utf8'));
+  assert.notEqual(vercel.cleanUrls, true, 'cleanUrls rompe el arranque sin conexión');
+  assert.equal(vercel.outputDirectory, OUT);
+  assert.equal(vercel.buildCommand, 'npm run build');
+
+  // And the worker copes even on a host that redirects anyway.
+  const worker = readFileSync('public/sw.js', 'utf8');
+  assert.match(worker, /cached\.redirected/, 'el worker debe rehacer una respuesta redirigida');
+});
+
+test('the worker revalidates on every deploy, and the host is told not to cache it', () => {
+  const vercel = JSON.parse(readFileSync('vercel.json', 'utf8'));
+  const rule = vercel.headers.find((entry) => entry.source === '/sw.js');
+  assert.ok(rule, 'sw.js necesita su propia regla de caché');
+  const cacheControl = rule.headers.find((header) => header.key === 'Cache-Control').value;
+  assert.match(cacheControl, /max-age=0/, 'un sw.js cacheado deja el teléfono en una versión muerta');
+  assert.match(cacheControl, /must-revalidate/);
+});
