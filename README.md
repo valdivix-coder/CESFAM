@@ -49,13 +49,26 @@ antes de que sea público.
 > servicio municipal; si no, están el plan Pro o el respaldo en GitHub Pages,
 > que no tiene esa restricción.
 
+## Compartirla
+
+La página trae un botón **Compartir por WhatsApp** que abre un mensaje ya
+redactado con la dirección desde la que se está sirviendo la app —así, un
+enlace compartido desde Vercel apunta a Vercel y uno compartido desde el
+respaldo apunta al respaldo.
+
+Al pegar esa dirección en un chat, WhatsApp muestra una tarjeta con el icono y
+el nombre de la app (`public/icons/share-card.png`, 1200×630). Esa tarjeta y la
+dirección viven en las etiquetas Open Graph de `index.html`; el build las
+reescribe con la dirección real del despliegue, tomándola de `SITE_URL` o de las
+variables que Vercel expone.
+
 ## Instalarla en el teléfono
 
 - **Android:** aparece el botón «Instalar en tu teléfono» al pie de la página.
 - **iPhone:** Safari no ofrece ese botón. Hay que usar **Compartir → Añadir a
   pantalla de inicio**.
 
-Tras la primera visita queda guardada entera (235 KB) y **abre sin conexión**.
+Tras la primera visita queda guardada entera (265 KB) y **abre sin conexión**.
 Cuando se publica una versión nueva, el teléfono la recoge en la visita
 siguiente.
 
@@ -63,7 +76,7 @@ siguiente.
 
 ```bash
 npm start     # servidor local en http://localhost:3000
-npm test      # 64 pruebas: búsqueda, conversor, servidor, interfaz y build
+npm test      # 79 pruebas: búsqueda, conversor, servidor, interfaz y build
 npm run build # genera site/, que es lo que se publica
 ```
 
