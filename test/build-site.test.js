@@ -25,7 +25,9 @@ test('the built site carries everything the app loads', (t) => {
     'fonts/instrument-sans-latin.woff2',
     'fonts/instrument-sans-latin-ext.woff2',
     'icons/icon-192.png', 'icons/icon-512.png',
-    'icons/maskable-192.png', 'icons/maskable-512.png', 'icons/apple-touch-icon.png',
+    'icons/maskable-192.png', 'icons/maskable-512.png',
+    'icons/icon-rounded-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png',
+    'icons/app-icon-96.png',
   ]) {
     assert.ok(files.includes(required), `falta ${required} en el sitio publicado`);
   }
@@ -76,6 +78,8 @@ test('the manifest is installable: relative scope and every icon present', (t) =
   assert.equal(manifest.scope, './');
   assert.equal(manifest.display, 'standalone');
   assert.ok(manifest.name && manifest.short_name);
+  assert.equal(manifest.name, 'Sectores', 'así se llama la app instalada');
+  assert.equal(manifest.short_name, 'Sectores');
   assert.ok(manifest.short_name.length <= 12, 'el nombre corto se trunca en el lanzador');
   assert.match(manifest.theme_color, /^#[0-9a-f]{6}$/);
 
@@ -121,4 +125,40 @@ test('the worker revalidates on every deploy, and the host is told not to cache 
   const cacheControl = rule.headers.find((header) => header.key === 'Cache-Control').value;
   assert.match(cacheControl, /max-age=0/, 'un sw.js cacheado deja el teléfono en una versión muerta');
   assert.match(cacheControl, /must-revalidate/);
+});
+
+test('the installed name is the same everywhere it can be shown', () => {
+  const manifest = JSON.parse(readFileSync('public/manifest.webmanifest', 'utf8'));
+  const html = readFileSync('public/index.html', 'utf8');
+  const appleTitle = /<meta name="apple-mobile-web-app-title" content="([^"]+)">/.exec(html);
+  assert.ok(appleTitle, 'iOS toma el nombre de su propia etiqueta, no del manifest');
+  assert.equal(appleTitle[1], manifest.short_name);
+});
+
+test('every icon is the same mark, and it clears the maskable safe zone', async () => {
+  // Android crops a maskable icon to a circle of 80% of the side, so anything
+  // beyond a radius of 0.40 from the centre can be cut off.
+  const { execFileSync } = require('node:child_process');
+  const report = execFileSync('python3', ['scripts/check-icons.py'], { encoding: 'utf8' });
+  assert.match(report, /^ok/m, report);
+});
+
+test('the install control shows the app it installs', () => {
+  const html = readFileSync('public/index.html', 'utf8');
+  const manifest = JSON.parse(readFileSync('public/manifest.webmanifest', 'utf8'));
+  assert.match(html, /class="install-icon" src="icons\/app-icon-96\.png"/,
+    'la tarjeta lleva el mismo icono que se instala');
+  const name = /<span class="install-name">\s*<strong>([^<]+)<\/strong>/.exec(html);
+  assert.ok(name, 'la tarjeta debe nombrar la app');
+  assert.equal(name[1], manifest.short_name, 'el nombre mostrado y el instalado deben coincidir');
+});
+
+test('no ARIA attribute points at an element that does not exist', () => {
+  const html = readFileSync('public/index.html', 'utf8');
+  const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
+  for (const [, attribute, value] of html.matchAll(/\s(aria-controls|aria-describedby|aria-labelledby|for)="([^"]+)"/g)) {
+    for (const reference of value.split(/\s+/)) {
+      assert.ok(ids.has(reference), `${attribute}="${reference}" no apunta a ningún elemento`);
+    }
+  }
 });

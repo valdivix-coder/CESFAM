@@ -88,6 +88,8 @@ function createPage() {
     ['#suggestions', 'ul'],
     ['#answer', 'section'],
     ['#install-button', 'button'],
+    ['#install-help', 'div'],
+    ['#install-card', 'div'],
   ]) {
     const node = new Element(tag);
     node.id = selector.slice(1);
@@ -95,7 +97,7 @@ function createPage() {
   }
   elements['#suggestions'].hidden = true;
   elements['#clear-button'].hidden = true;
-  elements['#install-button'].hidden = true;
+  elements['#install-help'].hidden = true;
 
   return {
     elements,
@@ -112,7 +114,7 @@ function createPage() {
 const database = JSON.parse(readFileSync('data/sectores.json', 'utf8'));
 
 /** Loads sector-lookup.js and app.js in one sandbox, with a stubbed fetch. */
-function loadApp({ fetchImpl, seeded, serviceWorker } = {}) {
+function loadApp({ fetchImpl, seeded, serviceWorker, standalone } = {}) {
   const page = createPage();
   const registrations = [];
   const listeners = new Map();
@@ -125,6 +127,7 @@ function loadApp({ fetchImpl, seeded, serviceWorker } = {}) {
     navigator: serviceWorker === false ? {} : {
       serviceWorker: { register: async (path) => { registrations.push(path); } },
     },
+    matchMedia: () => ({ matches: Boolean(standalone) }),
     addEventListener(name, handler) {
       listeners.set(name, (listeners.get(name) || []).concat(handler));
     },
@@ -379,10 +382,10 @@ test('resolves the database relative to its own script', async () => {
 
 /* ── Install and offline ───────────────────────────────────────────────── */
 
-test('the install button stays hidden until the browser offers to install', async () => {
+test('the install button is always offered, and prompts when the browser can', async () => {
   const page = await ready();
   const button = page.elements['#install-button'];
-  assert.equal(button.hidden, true, 'nunca promete una instalación que el equipo no hará');
+  assert.equal(button.hidden, false, 'la mayoría nunca encuentra el menú del navegador');
 
   let prompted = false;
   let defaultPrevented = false;
@@ -391,20 +394,41 @@ test('the install button stays hidden until the browser offers to install', asyn
     prompt: async () => { prompted = true; },
   });
   assert.ok(defaultPrevented, 'el aviso propio del navegador se pospone en favor del botón');
-  assert.equal(button.hidden, false);
 
   button.dispatch('click');
   await page.settle();
-  assert.ok(prompted, 'el botón abre el diálogo de instalación');
+  assert.ok(prompted);
   assert.equal(button.hidden, true, 'no queda un botón que ya no hace nada');
 });
 
-test('the button disappears once the app is installed', async () => {
+test('without a prompt the button shows the steps instead of pretending', async () => {
   const page = await ready();
-  page.sandbox.fire('beforeinstallprompt', { prompt: async () => {} });
-  assert.equal(page.elements['#install-button'].hidden, false);
-  page.sandbox.fire('appinstalled');
+  const button = page.elements['#install-button'];
+  const help = page.elements['#install-help'];
+  assert.equal(help.hidden, true);
+
+  button.dispatch('click');
+  assert.equal(help.hidden, false, 'Safari nunca ofrece el diálogo: hay que explicarlo');
+  assert.equal(button.getAttribute('aria-expanded'), 'true');
+  assert.equal(button.hidden, false, 'el botón sigue ahí para poder cerrar la ayuda');
+
+  button.dispatch('click');
+  assert.equal(help.hidden, true);
+  assert.equal(button.getAttribute('aria-expanded'), 'false');
+});
+
+test('the whole card is gone once the app runs installed', async () => {
+  const page = loadApp({ standalone: true });
+  await page.settle();
+  assert.equal(page.elements['#install-card'].hidden, true, 'no queda una tarjeta que ya no sirve');
   assert.equal(page.elements['#install-button'].hidden, true);
+});
+
+test('the card disappears once the app is installed', async () => {
+  const page = await ready();
+  assert.equal(page.elements['#install-card'].hidden, false);
+  page.sandbox.fire('appinstalled');
+  assert.equal(page.elements['#install-card'].hidden, true);
 });
 
 test('registers the service worker with a relative path', async () => {

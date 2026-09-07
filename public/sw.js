@@ -27,11 +27,14 @@ const SHELL = [
   'fonts/archivo-subset.woff2',
   'fonts/instrument-sans-latin.woff2',
   'fonts/instrument-sans-latin-ext.woff2',
+  'icons/app-icon-96.png',
   'icons/icon-192.png',
   'icons/icon-512.png',
   'icons/maskable-192.png',
   'icons/maskable-512.png',
+  'icons/icon-rounded-512.png',
   'icons/apple-touch-icon.png',
+  'icons/favicon-32.png',
   'data/sectores.json',
 ];
 
