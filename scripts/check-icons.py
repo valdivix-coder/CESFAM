@@ -31,7 +31,8 @@ def mark_extent(path):
 def main():
     problems = []
     for name in ('icon-192.png', 'icon-512.png', 'maskable-192.png', 'maskable-512.png',
-                 'apple-touch-icon.png', 'favicon-32.png', 'icon-rounded-512.png'):
+                 'apple-touch-icon.png', 'favicon-32.png', 'icon-rounded-512.png',
+                 'app-icon-96.png'):
         path = ICONS / name
         if not path.exists():
             problems.append(f'falta {name}')

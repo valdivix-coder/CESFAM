@@ -24,6 +24,7 @@ const list = document.querySelector('#suggestions');
 const answer = document.querySelector('#answer');
 const installButton = document.querySelector('#install-button');
 const installHelp = document.querySelector('#install-help');
+const installCard = document.querySelector('#install-card');
 
 const RESTING_HINT = 'La búsqueda no distingue mayúsculas ni tildes.';
 
@@ -303,8 +304,8 @@ const installed = () => (window.matchMedia && window.matchMedia('(display-mode: 
   || window.navigator.standalone === true;
 
 function hideInstall() {
-  if (!installButton) return;
-  installButton.hidden = true;
+  if (installCard) installCard.hidden = true;
+  if (installButton) installButton.hidden = true;
   if (installHelp) installHelp.hidden = true;
 }
 

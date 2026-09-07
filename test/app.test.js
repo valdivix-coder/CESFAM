@@ -89,6 +89,7 @@ function createPage() {
     ['#answer', 'section'],
     ['#install-button', 'button'],
     ['#install-help', 'div'],
+    ['#install-card', 'div'],
   ]) {
     const node = new Element(tag);
     node.id = selector.slice(1);
@@ -416,17 +417,18 @@ test('without a prompt the button shows the steps instead of pretending', async 
   assert.equal(button.getAttribute('aria-expanded'), 'false');
 });
 
-test('the button is gone once the app runs installed', async () => {
+test('the whole card is gone once the app runs installed', async () => {
   const page = loadApp({ standalone: true });
   await page.settle();
+  assert.equal(page.elements['#install-card'].hidden, true, 'no queda una tarjeta que ya no sirve');
   assert.equal(page.elements['#install-button'].hidden, true);
 });
 
-test('the button disappears once the app is installed', async () => {
+test('the card disappears once the app is installed', async () => {
   const page = await ready();
-  assert.equal(page.elements['#install-button'].hidden, false);
+  assert.equal(page.elements['#install-card'].hidden, false);
   page.sandbox.fire('appinstalled');
-  assert.equal(page.elements['#install-button'].hidden, true);
+  assert.equal(page.elements['#install-card'].hidden, true);
 });
 
 test('registers the service worker with a relative path', async () => {

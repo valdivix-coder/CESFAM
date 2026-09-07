@@ -61,15 +61,17 @@
       <section class="answer" id="answer" aria-live="polite" aria-atomic="true"></section>
 
       <footer class="credits">
-        <div class="install-block">
-          <button class="install" id="install-button" type="button"
-                  aria-expanded="false" aria-controls="install-help">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 4v11"/><path d="m7.6 10.8 4.4 4.4 4.4-4.4"/><path d="M5 19.4h14"/>
-            </svg>
-            Instalar la app
-          </button>
+        <div class="install-block" id="install-card">
+          <div class="install-app">
+            <img class="install-icon" src="icons/app-icon-96.png" alt="" width="96" height="96" decoding="async">
+            <span class="install-name">
+              <strong>Sectores</strong>
+              <span>Consúltala sin conexión</span>
+            </span>
+            <button class="install" id="install-button" type="button"
+                    aria-label="Instalar Sectores"
+                    aria-expanded="false" aria-controls="install-help">Instalar</button>
+          </div>
           <div class="install-help" id="install-help" hidden>
             <p><strong>Android</strong> — Menú <span aria-hidden="true">⋮</span> del navegador →
               <em>Instalar aplicación</em>.</p>

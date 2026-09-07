@@ -411,27 +411,42 @@ h1 {
 .credits-line strong { color: var(--ink-soft); font-weight: 600; }
 .credits-role { color: var(--faint); display: block; }
 
-.install-block { display: flex; flex-direction: column; gap: 12px; }
+/* The install control carries the app's own icon and name, so it reads as an
+   app to keep rather than as one more link. */
+.install-block { display: flex; flex-direction: column; gap: 10px; }
 
-.install {
+.install-app {
   align-items: center;
-  align-self: center;
   background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  color: var(--ink-soft);
-  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
   display: flex;
-  font-family: inherit;
-  font-size: .82rem;
-  font-weight: 500;
-  gap: 8px;
-  padding: 10px 20px 10px 16px;
-  transition: border-color .18s ease, color .18s ease;
+  gap: 14px;
+  padding: 14px 16px;
+  text-align: left;
 }
 
-.install svg { height: 16px; width: 16px; }
-.install:hover { border-color: var(--faint); color: var(--ink); }
+.install-icon { border-radius: 12px; box-shadow: 0 0 0 1px var(--line); flex: none; height: 48px; width: 48px; }
+
+.install-name { display: grid; flex: 1; gap: 2px; min-width: 0; }
+.install-name strong { color: var(--ink); font-size: .95rem; font-weight: 600; letter-spacing: -.01em; }
+.install-name > span { color: var(--muted); font-size: .78rem; line-height: 1.4; }
+
+.install {
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  color: var(--bg);
+  cursor: pointer;
+  flex: none;
+  font-family: inherit;
+  font-size: .82rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  transition: opacity .18s ease;
+}
+
+.install:hover { opacity: .85; }
 .install:focus-visible { box-shadow: 0 0 0 3px var(--ring); outline: none; }
 
 .install-help {
@@ -480,6 +495,9 @@ h1 {
 
 @media (max-width: 420px) {
   .shell { gap: calc(var(--step) * 7); padding-inline: 18px; }
+  .install-app { gap: 12px; padding: 13px 14px; }
+  .install-icon { height: 44px; width: 44px; }
+  .install { padding: 9px 15px; }
   .number-ask { padding-left: 14px; }
   .number-ask input { width: 84px; }
 }

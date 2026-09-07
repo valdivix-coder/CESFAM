@@ -27,6 +27,7 @@ test('the built site carries everything the app loads', (t) => {
     'icons/icon-192.png', 'icons/icon-512.png',
     'icons/maskable-192.png', 'icons/maskable-512.png',
     'icons/icon-rounded-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png',
+    'icons/app-icon-96.png',
   ]) {
     assert.ok(files.includes(required), `falta ${required} en el sitio publicado`);
   }
@@ -140,4 +141,24 @@ test('every icon is the same mark, and it clears the maskable safe zone', async 
   const { execFileSync } = require('node:child_process');
   const report = execFileSync('python3', ['scripts/check-icons.py'], { encoding: 'utf8' });
   assert.match(report, /^ok/m, report);
+});
+
+test('the install control shows the app it installs', () => {
+  const html = readFileSync('public/index.html', 'utf8');
+  const manifest = JSON.parse(readFileSync('public/manifest.webmanifest', 'utf8'));
+  assert.match(html, /class="install-icon" src="icons\/app-icon-96\.png"/,
+    'la tarjeta lleva el mismo icono que se instala');
+  const name = /<span class="install-name">\s*<strong>([^<]+)<\/strong>/.exec(html);
+  assert.ok(name, 'la tarjeta debe nombrar la app');
+  assert.equal(name[1], manifest.short_name, 'el nombre mostrado y el instalado deben coincidir');
+});
+
+test('no ARIA attribute points at an element that does not exist', () => {
+  const html = readFileSync('public/index.html', 'utf8');
+  const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
+  for (const [, attribute, value] of html.matchAll(/\s(aria-controls|aria-describedby|aria-labelledby|for)="([^"]+)"/g)) {
+    for (const reference of value.split(/\s+/)) {
+      assert.ok(ids.has(reference), `${attribute}="${reference}" no apunta a ningún elemento`);
+    }
+  }
 });
