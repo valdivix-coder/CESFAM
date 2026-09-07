@@ -28,6 +28,7 @@ const SHELL = [
   'fonts/instrument-sans-latin.woff2',
   'fonts/instrument-sans-latin-ext.woff2',
   'icons/app-icon-96.png',
+  'icons/share-card.png',
   'icons/icon-192.png',
   'icons/icon-512.png',
   'icons/maskable-192.png',

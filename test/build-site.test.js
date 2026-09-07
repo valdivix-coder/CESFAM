@@ -27,7 +27,7 @@ test('the built site carries everything the app loads', (t) => {
     'icons/icon-192.png', 'icons/icon-512.png',
     'icons/maskable-192.png', 'icons/maskable-512.png',
     'icons/icon-rounded-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png',
-    'icons/app-icon-96.png',
+    'icons/app-icon-96.png', 'icons/share-card.png',
   ]) {
     assert.ok(files.includes(required), `falta ${required} en el sitio publicado`);
   }
@@ -161,4 +161,50 @@ test('no ARIA attribute points at an element that does not exist', () => {
       assert.ok(ids.has(reference), `${attribute}="${reference}" no apunta a ningún elemento`);
     }
   }
+});
+
+test('the link preview names the app and points at real files', (t) => {
+  t.after(() => rmSync(OUT, { recursive: true, force: true }));
+  build();
+  const html = readFileSync(join(OUT, 'index.html'), 'utf8');
+  const meta = Object.fromEntries([...html.matchAll(/<meta property="(og:[^"]+)" content="([^"]*)">/g)]
+    .map(([, key, value]) => [key, value]));
+
+  assert.equal(meta['og:site_name'], 'Sectores');
+  assert.match(meta['og:title'], /Sectores/);
+  assert.ok(meta['og:description'].length > 40, 'la descripción es lo que se lee bajo el título');
+
+  // Scrapers do not run scripts and often refuse relative image URLs.
+  for (const key of ['og:url', 'og:image']) {
+    assert.match(meta[key], /^https:\/\//, `${key} debe ser absoluto`);
+  }
+  assert.ok(meta['og:image'].startsWith(meta['og:url']), 'la imagen debe vivir en el mismo sitio');
+  const image = meta['og:image'].slice(meta['og:url'].length);
+  assert.ok(existsSync(join(OUT, image)), `${image} no se publica`);
+  assert.equal(meta['og:image:width'], '1200');
+  assert.equal(meta['og:image:height'], '630');
+});
+
+test('the build stamps the address this deploy is published at', (t) => {
+  t.after(() => rmSync(OUT, { recursive: true, force: true }));
+  const { execFileSync } = require('node:child_process');
+  execFileSync('node', ['scripts/build-site.js'], {
+    stdio: ['ignore', 'pipe', 'pipe'],
+    env: { ...process.env, SITE_URL: 'https://ejemplo.test' },
+  });
+  const html = readFileSync(join(OUT, 'index.html'), 'utf8');
+  assert.match(html, /<meta property="og:url" content="https:\/\/ejemplo\.test\/">/,
+    'una barra final faltante rompería la URL de la imagen');
+  assert.match(html, /<meta property="og:image" content="https:\/\/ejemplo\.test\/icons\/share-card\.png">/);
+  assert.doesNotMatch(html, /valdivix-coder\.github\.io/, 'quedó la dirección por defecto');
+});
+
+test('the share link works before any script runs', () => {
+  const html = readFileSync('public/index.html', 'utf8');
+  const link = /<a class="share" id="share-button" href="([^"]+)"[\s\S]*?data-message="([^"]+)"/.exec(html);
+  assert.ok(link, 'el enlace debe traer un href utilizable');
+  const text = decodeURIComponent(new URL(link[1]).searchParams.get('text'));
+  assert.ok(text.startsWith(link[2]), 'el href y el mensaje deben decir lo mismo');
+  const meta = /<meta property="og:url" content="([^"]+)">/.exec(html);
+  assert.ok(text.endsWith(meta[1]), 'el respaldo debe apuntar a la dirección publicada');
 });

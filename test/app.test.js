@@ -90,6 +90,7 @@ function createPage() {
     ['#install-button', 'button'],
     ['#install-help', 'div'],
     ['#install-card', 'div'],
+    ['#share-button', 'a'],
   ]) {
     const node = new Element(tag);
     node.id = selector.slice(1);
@@ -98,6 +99,8 @@ function createPage() {
   elements['#suggestions'].hidden = true;
   elements['#clear-button'].hidden = true;
   elements['#install-help'].hidden = true;
+  elements['#share-button'].dataset.message = 'Te comparto *Sectores*';
+  elements['#share-button'].href = 'https://wa.me/?text=fallback';
 
   return {
     elements,
@@ -114,7 +117,7 @@ function createPage() {
 const database = JSON.parse(readFileSync('data/sectores.json', 'utf8'));
 
 /** Loads sector-lookup.js and app.js in one sandbox, with a stubbed fetch. */
-function loadApp({ fetchImpl, seeded, serviceWorker, standalone } = {}) {
+function loadApp({ fetchImpl, seeded, serviceWorker, standalone, location } = {}) {
   const page = createPage();
   const registrations = [];
   const listeners = new Map();
@@ -128,6 +131,9 @@ function loadApp({ fetchImpl, seeded, serviceWorker, standalone } = {}) {
       serviceWorker: { register: async (path) => { registrations.push(path); } },
     },
     matchMedia: () => ({ matches: Boolean(standalone) }),
+    location: location || {
+      protocol: 'https:', origin: 'https://sectores.example', pathname: '/',
+    },
     addEventListener(name, handler) {
       listeners.set(name, (listeners.get(name) || []).concat(handler));
     },
@@ -453,4 +459,40 @@ test('a browser without service workers still runs the app', async () => {
   await page.settle();
   type(page, 'ambar');
   assert.deepEqual(sectorsShown(page), ['verde']);
+});
+
+/* ── Share ─────────────────────────────────────────────────────────────── */
+
+const sharedText = (page) =>
+  decodeURIComponent(new URL(page.elements['#share-button'].href).searchParams.get('text'));
+
+test('the share link carries the invitation and the address it is served from', async () => {
+  const page = await ready();
+  const text = sharedText(page);
+  assert.match(text, /Te comparto \*Sectores\*/, 'el mensaje viaja con el enlace');
+  assert.ok(text.endsWith('https://sectores.example/'), `terminaba en: ${text.slice(-40)}`);
+  assert.ok(page.elements['#share-button'].href.startsWith('https://wa.me/?text='));
+});
+
+test('a copy served from a subdirectory shares its own address', async () => {
+  const page = loadApp({
+    location: { protocol: 'https:', origin: 'https://valdivix-coder.github.io', pathname: '/CESFAM/' },
+  });
+  await page.settle();
+  assert.ok(sharedText(page).endsWith('https://valdivix-coder.github.io/CESFAM/'));
+});
+
+test('index.html is not shared as part of the address', async () => {
+  const page = loadApp({
+    location: { protocol: 'https:', origin: 'https://sectores.example', pathname: '/index.html' },
+  });
+  await page.settle();
+  assert.ok(sharedText(page).endsWith('https://sectores.example/'), sharedText(page).slice(-40));
+});
+
+test('opened from a file, the link keeps the address written into the page', async () => {
+  const page = loadApp({ location: { protocol: 'file:', origin: 'null', pathname: '/tmp/x.html' } });
+  await page.settle();
+  assert.equal(page.elements['#share-button'].href, 'https://wa.me/?text=fallback',
+    'sin un origen real no se puede inventar una dirección');
 });

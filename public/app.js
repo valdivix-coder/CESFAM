@@ -25,6 +25,7 @@ const answer = document.querySelector('#answer');
 const installButton = document.querySelector('#install-button');
 const installHelp = document.querySelector('#install-help');
 const installCard = document.querySelector('#install-card');
+const shareButton = document.querySelector('#share-button');
 
 const RESTING_HINT = 'La búsqueda no distingue mayúsculas ni tildes.';
 
@@ -291,6 +292,21 @@ if (database) {
       loadError = true;
       showAnswer();
     });
+}
+
+/* ── Share ────────────────────────────────────────────────────────────────
+   The address that goes into the message is wherever the app is actually
+   being served from, so a link shared from the Vercel deploy points there and
+   one shared from the GitHub Pages copy points there. The href written into
+   the page is a working fallback for when this never runs.                  */
+
+if (shareButton) {
+  const { protocol, origin, pathname } = window.location;
+  if (protocol === 'http:' || protocol === 'https:') {
+    const address = origin + pathname.replace(/index\.html$/, '');
+    const message = `${shareButton.dataset.message}\n\n${address}`;
+    shareButton.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
+  }
 }
 
 /* ── Install ───────────────────────────────────────────────────────────────
