@@ -201,10 +201,47 @@ test('the build stamps the address this deploy is published at', (t) => {
 
 test('the share link works before any script runs', () => {
   const html = readFileSync('public/index.html', 'utf8');
-  const link = /<a class="share" id="share-button" href="([^"]+)"[\s\S]*?data-message="([^"]+)"/.exec(html);
-  assert.ok(link, 'el enlace debe traer un href utilizable');
-  const text = decodeURIComponent(new URL(link[1]).searchParams.get('text'));
-  assert.ok(text.startsWith(link[2]), 'el href y el mensaje deben decir lo mismo');
+  const tag = /<a\s[^>]*id="share-button"[^>]*>/.exec(html);
+  assert.ok(tag, 'la página debe traer el enlace de compartir');
+  const href = /\shref="([^"]+)"/.exec(tag[0]);
+  const message = /\sdata-message="([^"]+)"/.exec(tag[0]);
+  assert.ok(href && message, 'el enlace debe traer un href utilizable y su mensaje');
+  const text = decodeURIComponent(new URL(href[1]).searchParams.get('text'));
+  assert.ok(text.startsWith(message[1]), 'el href y el mensaje deben decir lo mismo');
   const meta = /<meta property="og:url" content="([^"]+)">/.exec(html);
   assert.ok(text.endsWith(meta[1]), 'el respaldo debe apuntar a la dirección publicada');
+});
+
+test('every inline icon carries its own size', () => {
+  // A stylesheet that has not applied yet — the first load after a deploy, a
+  // slow connection — leaves an SVG with only a viewBox to fill whatever space
+  // it is given. On a phone that renders the icon across the whole screen.
+  const html = readFileSync('public/index.html', 'utf8');
+  const body = html.slice(html.indexOf('<body>'));
+  for (const [tag] of body.matchAll(/<svg[^>]*>/g)) {
+    assert.match(tag, /\swidth="\d+"/, `este <svg> no declara ancho: ${tag.slice(0, 70)}`);
+    assert.match(tag, /\sheight="\d+"/, `este <svg> no declara alto: ${tag.slice(0, 70)}`);
+  }
+});
+
+test('images declare the size they are drawn at', () => {
+  // Same reason as the icons: an image that declares its full pixel size fills
+  // the screen on a page whose stylesheet has not applied yet.
+  const html = readFileSync('public/index.html', 'utf8');
+  const sizes = { crest: 46, 'install-icon': 48 };
+  for (const [name, expected] of Object.entries(sizes)) {
+    const tag = new RegExp(`<img class="${name}"[^>]*>`).exec(html);
+    assert.ok(tag, `falta la imagen ${name}`);
+    assert.match(tag[0], new RegExp(`width="${expected}"`), `${name} declara otro ancho`);
+  }
+});
+
+test('a navigation is answered from the same build as its assets', () => {
+  // Answering navigations from the network while assets come from the cache
+  // pairs a freshly deployed page with the previous build's stylesheet.
+  const worker = readFileSync('public/sw.js', 'utf8');
+  const navigation = worker.slice(worker.indexOf("request.mode === 'navigate'"));
+  const body = navigation.slice(0, navigation.indexOf('    return;'));
+  assert.ok(body.indexOf('shellResponse()') < body.indexOf('fetch(request)'),
+    'la caché debe consultarse antes que la red en una navegación');
 });

@@ -152,6 +152,8 @@ body {
    so the working block sits optically centred instead of pooling a gap. */
 .masthead { display: flex; flex-direction: column; gap: calc(var(--step) * 4); margin-top: auto; }
 
+.masthead-top { align-items: center; display: flex; gap: 14px; justify-content: space-between; }
+
 .eyebrow {
   align-items: center;
   color: var(--muted);
@@ -457,25 +459,27 @@ h1 {
 .install:hover { opacity: .85; }
 .install:focus-visible { box-shadow: 0 0 0 3px var(--ring); outline: none; }
 
-/* Deliberately not WhatsApp green: on this page a green pill would read as
-   Sector Verde. The glyph names the destination; the colour stays out of it. */
+/* A small share control at the top right of the header, the way a news page
+   or a blog post carries one. Deliberately not WhatsApp green: on a page where
+   colour means "this is your sector", a green pill would read as Sector Verde. */
 .share {
   align-items: center;
-  border-top: 1px solid var(--line);
+  border: 1px solid var(--line);
+  border-radius: 999px;
   color: var(--muted);
   display: flex;
-  font-size: .84rem;
+  flex: none;
+  font-size: .78rem;
   font-weight: 500;
-  gap: 11px;
-  padding: 13px 16px;
-  text-align: left;
+  gap: 7px;
+  padding: 7px 13px;
   text-decoration: none;
-  transition: background .16s ease, color .16s ease;
+  transition: border-color .18s ease, color .18s ease;
 }
 
-.share svg { flex: none; height: 17px; width: 17px; }
-.share:hover { background: var(--surface-sunken); color: var(--ink); }
-.share:focus-visible { box-shadow: inset 0 0 0 2px var(--ring); outline: none; }
+.share svg { flex: none; height: 16px; width: 16px; }
+.share:hover { border-color: var(--line-strong); color: var(--ink); }
+.share:focus-visible { box-shadow: 0 0 0 3px var(--ring); outline: none; }
 
 .install-help {
   border: 1px solid var(--line);
@@ -521,10 +525,14 @@ h1 {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
+@media (max-width: 359px) {
+  .share span { display: none; }
+  .share { padding: 8px; }
+}
+
 @media (max-width: 420px) {
   .shell { gap: calc(var(--step) * 7); padding-inline: 18px; }
   .install-app { gap: 12px; padding: 13px 14px; }
-  .share { padding: 12px 14px; }
   .install-icon { height: 44px; width: 44px; }
   .install { padding: 9px 15px; }
   .number-ask { padding-left: 14px; }

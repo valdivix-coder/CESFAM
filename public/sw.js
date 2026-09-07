@@ -98,14 +98,20 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Navigations fall back to the cached shell, which is what makes the
-  // installed app open with no connection.
+  // Navigations are answered from the cache when there is one. Everything
+  // below is served from that same cache, so answering a navigation from the
+  // network instead would pair a freshly deployed page with the previous
+  // build's stylesheet and script until the next reload. Serving the whole
+  // shell from one build keeps every render internally consistent; the new
+  // version arrives through the worker update, not mid-page.
   if (request.mode === 'navigate') {
     event.respondWith((async () => {
+      const cached = await shellResponse();
+      if (cached.type !== 'error') return cached;
       try {
         return await fetch(request);
       } catch {
-        return shellResponse();
+        return Response.error();
       }
     })());
     return;
