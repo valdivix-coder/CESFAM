@@ -31,7 +31,9 @@ const SHELL = [
   'icons/icon-512.png',
   'icons/maskable-192.png',
   'icons/maskable-512.png',
+  'icons/icon-rounded-512.png',
   'icons/apple-touch-icon.png',
+  'icons/favicon-32.png',
   'data/sectores.json',
 ];
 

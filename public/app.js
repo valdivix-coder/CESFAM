@@ -23,6 +23,7 @@ const clearButton = document.querySelector('#clear-button');
 const list = document.querySelector('#suggestions');
 const answer = document.querySelector('#answer');
 const installButton = document.querySelector('#install-button');
+const installHelp = document.querySelector('#install-help');
 
 const RESTING_HINT = 'La búsqueda no distingue mayúsculas ni tildes.';
 
@@ -292,31 +293,46 @@ if (database) {
 }
 
 /* ── Install ───────────────────────────────────────────────────────────────
-   The button appears only when the browser says the app can be installed, so
-   it never promises something the device will not do. iOS has no such event:
-   there, installing is Compartir → Añadir a pantalla de inicio.             */
+   The button is always offered, because most people never find the browser
+   menu that hides this. When the browser can prompt, it prompts; when it
+   cannot — Safari never does — it shows the steps instead of pretending.    */
 
 let installPrompt = null;
+
+const installed = () => (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)
+  || window.navigator.standalone === true;
+
+function hideInstall() {
+  if (!installButton) return;
+  installButton.hidden = true;
+  if (installHelp) installHelp.hidden = true;
+}
 
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   installPrompt = event;
-  if (installButton) installButton.hidden = false;
 });
 
 if (installButton) {
+  if (installed()) hideInstall();
+
   installButton.addEventListener('click', async () => {
-    if (!installPrompt) return;
-    installButton.hidden = true;
-    const prompt = installPrompt;
-    installPrompt = null;
-    await prompt.prompt();
+    if (installPrompt) {
+      const prompt = installPrompt;
+      installPrompt = null;
+      hideInstall();
+      await prompt.prompt();
+      return;
+    }
+    if (!installHelp) return;
+    installHelp.hidden = !installHelp.hidden;
+    installButton.setAttribute('aria-expanded', String(!installHelp.hidden));
   });
 }
 
 window.addEventListener('appinstalled', () => {
   installPrompt = null;
-  if (installButton) installButton.hidden = true;
+  hideInstall();
 });
 
 // The service worker is what makes the installed app open with no signal.
