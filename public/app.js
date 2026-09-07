@@ -295,34 +295,74 @@ if (database) {
 }
 
 /* ── Share ────────────────────────────────────────────────────────────────
-   The address that goes into the message is wherever the app is actually
-   being served from, so a link shared from the Vercel deploy points there and
-   one shared from the GitHub Pages copy points there. The href written into
-   the page is a working fallback for when this never runs.                  */
+   wa.me without a number is what opens WhatsApp on a contact picker, so the
+   person sharing chooses who receives it. The address in the message is
+   wherever the app is being served from, so a link shared from one deploy
+   never points at another. The href written into the page works on its own,
+   which is what makes this survive a page whose script never ran.          */
+
+// A page inside a frame cannot open a tab: the sandbox drops target="_blank"
+// and the anchor does nothing at all. That is the preview's situation.
+const framed = (() => {
+  try {
+    return window.top !== window.self;
+  } catch {
+    return true;
+  }
+})();
 
 if (shareButton) {
   const { protocol, origin, pathname } = window.location;
-  if (protocol === 'http:' || protocol === 'https:') {
+  // A build that ships its own listing is a preview of the app, not the app:
+  // it must keep pointing at the published address rather than at itself.
+  if (!window.SECTOR_DATABASE && (protocol === 'http:' || protocol === 'https:')) {
     const address = origin + pathname.replace(/index\.html$/, '');
-    const message = `${shareButton.dataset.message}\n\n${address}`;
-    shareButton.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    shareButton.href = `https://wa.me/?text=${encodeURIComponent(`${shareButton.dataset.message}\n\n${address}`)}`;
+  }
+
+  if (framed) {
+    shareButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      // Try a tab first; if the frame is not allowed one, go there directly.
+      if (!window.open(shareButton.href, '_blank', 'noopener')) {
+        window.location.href = shareButton.href;
+      }
+    });
   }
 }
 
 /* ── Install ───────────────────────────────────────────────────────────────
-   The button is always offered, because most people never find the browser
-   menu that hides this. When the browser can prompt, it prompts; when it
-   cannot — Safari never does — it shows the steps instead of pretending.    */
+   Where the browser exposes an installer, the button opens it. Where it does
+   not — Safari exposes none at all — the button shows that browser's route
+   instead of a list the reader has to sort through.                        */
 
 let installPrompt = null;
 
 const installed = () => (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)
   || window.navigator.standalone === true;
 
+/** Which install route this browser actually offers. */
+function platform() {
+  const agent = window.navigator.userAgent || '';
+  if (/iPad|iPhone|iPod/.test(agent)
+    || (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1)) return 'ios';
+  return /Android/.test(agent) ? 'android' : 'desktop';
+}
+
 function hideInstall() {
   if (installCard) installCard.hidden = true;
   if (installButton) installButton.hidden = true;
   if (installHelp) installHelp.hidden = true;
+}
+
+function showRoute() {
+  if (!installHelp) return;
+  const here = platform();
+  for (const step of [...installHelp.querySelectorAll('p')]) {
+    if (step.dataset.platform !== here) step.remove();
+  }
+  installHelp.hidden = !installHelp.hidden;
+  installButton.setAttribute('aria-expanded', String(!installHelp.hidden));
 }
 
 window.addEventListener('beforeinstallprompt', (event) => {
@@ -334,16 +374,21 @@ if (installButton) {
   if (installed()) hideInstall();
 
   installButton.addEventListener('click', async () => {
-    if (installPrompt) {
-      const prompt = installPrompt;
-      installPrompt = null;
-      hideInstall();
-      await prompt.prompt();
+    if (!installPrompt) {
+      showRoute();
       return;
     }
-    if (!installHelp) return;
-    installHelp.hidden = !installHelp.hidden;
-    installButton.setAttribute('aria-expanded', String(!installHelp.hidden));
+    const prompt = installPrompt;
+    // The event can only be answered once, whatever the reader chooses.
+    installPrompt = null;
+    try {
+      await prompt.prompt();
+      const { outcome } = await prompt.userChoice;
+      // Dismissing is not installing: the card stays, so it can be tried again.
+      if (outcome === 'accepted') hideInstall();
+    } catch {
+      showRoute();
+    }
   });
 }
 

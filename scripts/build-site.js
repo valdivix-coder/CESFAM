@@ -15,9 +15,10 @@ const { cpSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFil
 const { join, relative, sep } = require('node:path');
 
 const root = join(__dirname, '..');
-// Whatever the sources ship as the public address; the build rewrites it to
-// wherever this deploy actually lands, so link previews resolve.
-const DEFAULT_SITE_URL = 'https://valdivix-coder.github.io/CESFAM/';
+// The primary address. The build rewrites it to wherever this deploy actually
+// lands — Vercel names its own, and the Pages workflow passes SITE_URL — so a
+// link preview always resolves against the host that served the page.
+const DEFAULT_SITE_URL = 'https://cesfam-lyart.vercel.app/';
 const publicDir = join(root, 'public');
 const dataDir = join(root, 'data');
 const outDir = join(root, 'site');
